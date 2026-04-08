@@ -12,7 +12,7 @@ This is the "visualization" stage of the pipeline.
 import os
 import pandas as pd
 import folium
-from folium.plugins import Fullscreen
+from folium.plugins import Fullscreen, MarkerCluster
 
 from config import OUTPUT_DIR
 from utils import validate_columns, validate_not_empty
@@ -104,17 +104,103 @@ def add_legend(map_obj: folium.Map) -> None:
     """
     map_obj.get_root().html.add_child(folium.Element(legend_html))
 
+# def make_map(companies_df: pd.DataFrame) -> None:
+#     """Build an interactive world map and save it as an HTML file."""
+#     validate_not_empty(companies_df, "make_map input")
+#     validate_columns(
+#         companies_df,
+#         ["name", "url", "headquarters", "founded", "lat", "lon"],
+#         "make_map input",
+#     )
+
+#     # Sort by founded year so newer companies are on top
+#     companies_df = companies_df.sort_values(by="founded", na_position="last")    
+
+#     m = folium.Map(
+#         location=[30, -30],
+#         zoom_start=2.5,
+#         tiles="CartoDB positron",
+#         min_zoom=2.5,
+#         world_copy_jump=False,
+#         max_bounds=True,
+#     )
+
+#     plotted = 0
+
+#     # Only plot companies with valid coordinates
+#     missing = companies_df["lat"].isna().sum()
+#     print(f"Geocoding complete: {len(companies_df) - missing} success, {missing} failed")
+#     for _, row in companies_df.dropna(subset=["lat", "lon"]).iterrows():
+#         color = get_marker_color(row["founded"])
+#         popup_html = build_popup_html(row)
+
+#         folium.CircleMarker(
+#             location=[row["lat"], row["lon"]],
+#             radius=6,
+#             color=color,
+#             fill=True,
+#             fill_color=color,
+#             fill_opacity=0.8,
+#             popup=folium.Popup(popup_html, max_width=250),
+#         ).add_to(m)
+
+#         plotted += 1
+
+#     add_legend(m)
+#     Fullscreen().add_to(m)
+
+#     map_path = os.path.join(OUTPUT_DIR, "ai_companies_map.html")
+#     m.save(map_path)
+#     print(f"Map saved: {plotted} companies plotted → {map_path}")
+
+
+def region_from_country(country: str) -> str:
+    """Map a country name to a broad region."""
+    if pd.isna(country):
+        return "Other"
+
+    country = str(country).strip()
+
+    if country in {"United States", "Canada"}:
+        return "North America"
+    if country in {
+        "United Kingdom", "France", "Germany", "Sweden", "Netherlands",
+        "Switzerland", "Ukraine", "Ireland", "Belgium", "Spain", "Italy"
+    }:
+        return "Europe"
+    if country in {
+        "China", "Japan", "India", "South Korea", "Singapore",
+        "Israel", "Saudi Arabia", "United Arab Emirates"
+    }:
+        return "Asia / Middle East"
+
+    return "Other"
+
+
+def region_color(region: str) -> str:
+    """Assign a marker color to each region."""
+    colors = {
+        "North America": "blue",
+        "Europe": "green",
+        "Asia / Middle East": "red",
+        "Other": "gray",
+    }
+    return colors.get(region, "gray")
+
+
 def make_map(companies_df: pd.DataFrame) -> None:
-    """Build an interactive world map and save it as an HTML file."""
+    """Build an interactive world map with clustered, region-colored markers."""
     validate_not_empty(companies_df, "make_map input")
     validate_columns(
         companies_df,
-        ["name", "url", "headquarters", "founded", "lat", "lon"],
+        ["name", "url", "headquarters", "lat", "lon", "country"],
         "make_map input",
     )
 
-    # Sort by founded year so newer companies are on top
-    companies_df = companies_df.sort_values(by="founded", na_position="last")    
+    valid = companies_df.dropna(subset=["lat", "lon"]).copy()
+    print(f"Plotting {len(valid)} companies out of {len(companies_df)}")
+
+    valid["region"] = valid["country"].apply(region_from_country)
 
     m = folium.Map(
         location=[30, -30],
@@ -125,13 +211,21 @@ def make_map(companies_df: pd.DataFrame) -> None:
         max_bounds=True,
     )
 
-    plotted = 0
+    layers = {
+        "North America": folium.FeatureGroup(name="North America").add_to(m),
+        "Europe": folium.FeatureGroup(name="Europe").add_to(m),
+        "Asia / Middle East": folium.FeatureGroup(name="Asia / Middle East").add_to(m),
+        "Other": folium.FeatureGroup(name="Other").add_to(m),
+    }
 
-    # Only plot companies with valid coordinates
-    missing = companies_df["lat"].isna().sum()
-    print(f"Geocoding complete: {len(companies_df) - missing} success, {missing} failed")
-    for _, row in companies_df.dropna(subset=["lat", "lon"]).iterrows():
-        color = get_marker_color(row["founded"])
+    clusters = {
+        region: MarkerCluster().add_to(layer)
+        for region, layer in layers.items()
+    }
+
+    for _, row in valid.iterrows():
+        region = row["region"]
+        color = region_color(region)
         popup_html = build_popup_html(row)
 
         folium.CircleMarker(
@@ -142,13 +236,35 @@ def make_map(companies_df: pd.DataFrame) -> None:
             fill_color=color,
             fill_opacity=0.8,
             popup=folium.Popup(popup_html, max_width=250),
-        ).add_to(m)
+        ).add_to(clusters[region])
 
-        plotted += 1
+    legend_html = """
+    <div style="
+        position: fixed;
+        bottom: 50px;
+        left: 50px;
+        width: 210px;
+        background-color: white;
+        border: 2px solid grey;
+        border-radius: 8px;
+        z-index: 9999;
+        font-size: 14px;
+        padding: 10px;
+        box-shadow: 2px 2px 6px rgba(0,0,0,0.15);
+        line-height: 1.6;
+    ">
+      <div style="font-weight: 700; margin-bottom: 8px;">Region</div>
+      <div><span style="color: blue;">●</span> North America</div>
+      <div><span style="color: green;">●</span> Europe</div>
+      <div><span style="color: red;">●</span> Asia / Middle East</div>
+      <div><span style="color: gray;">●</span> Other</div>
+    </div>
+    """
+    m.get_root().html.add_child(folium.Element(legend_html))
 
-    add_legend(m)
+    folium.LayerControl().add_to(m)
     Fullscreen().add_to(m)
 
     map_path = os.path.join(OUTPUT_DIR, "ai_companies_map.html")
     m.save(map_path)
-    print(f"Map saved: {plotted} companies plotted → {map_path}")
+    print(f"Map saved: {len(valid)} companies plotted → {map_path}")
