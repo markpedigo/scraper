@@ -1,0 +1,2015 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_44247aeda3b5c3b0da6774514a2ab918 {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+                .leaflet-container { font-size: 1rem; }
+            </style>
+
+            <style>html, body {
+                width: 100%;
+                height: 100%;
+                margin: 0;
+                padding: 0;
+            }
+            </style>
+
+            <style>#map {
+                position:absolute;
+                top:0;
+                bottom:0;
+                right:0;
+                left:0;
+                }
+            </style>
+
+            <script>
+                L_NO_TOUCH = false;
+                L_DISABLE_3D = false;
+            </script>
+
+        
+    <script src="https://cdn.jsdelivr.net/npm/leaflet.fullscreen@3.0.0/Control.FullScreen.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet.fullscreen@3.0.0/Control.FullScreen.css"/>
+</head>
+<body>
+    
+    
+    <div style="position: fixed; bottom: 50px; left: 50px; width: 210px; background-color: white; border: 2px solid grey; border-radius: 8px; z-index: 9999; font-size: 14px; padding: 10px; box-shadow: 2px 2px 6px rgba(0,0,0,0.15); line-height: 1.6;">
+      <div style="font-weight: 700; margin-bottom: 8px;">Founded Year</div>
+      <div style="display: flex; align-items: center; margin-bottom: 4px;"><span style="display: inline-block; width: 12px; height: 12px; margin-right: 8px; border-radius: 50%; background: red;"></span>Before 2000</div>
+      <div style="display: flex; align-items: center; margin-bottom: 4px;"><span style="display: inline-block; width: 12px; height: 12px; margin-right: 8px; border-radius: 50%; background: orange;"></span>2000-2009</div>
+      <div style="display: flex; align-items: center; margin-bottom: 4px;"><span style="display: inline-block; width: 12px; height: 12px; margin-right: 8px; border-radius: 50%; background: yellow; border: 1px solid #999;"></span>2010-2019</div>
+      <div style="display: flex; align-items: center; margin-bottom: 4px;"><span style="display: inline-block; width: 12px; height: 12px; margin-right: 8px; border-radius: 50%; background: green;"></span>2020+</div>
+      <div style="display: flex; align-items: center;"><span style="display: inline-block; width: 12px; height: 12px; margin-right: 8px; border-radius: 50%; background: gray;"></span>Unknown</div>
+    </div>
+    
+    
+            <div class="folium-map" id="map_44247aeda3b5c3b0da6774514a2ab918" ></div>
+        
+</body>
+<script>
+    
+    
+            var map_44247aeda3b5c3b0da6774514a2ab918 = L.map(
+                "map_44247aeda3b5c3b0da6774514a2ab918",
+                {
+                    center: [30.0, -30.0],
+                    crs: L.CRS.EPSG3857,
+                    ...{
+  "maxBounds": [
+[
+-90,
+-180,
+],
+[
+90,
+180,
+],
+],
+  "zoom": 2.5,
+  "zoomControl": true,
+  "preferCanvas": false,
+  "worldCopyJump": false,
+}
+
+                }
+            );
+
+            
+
+        
+    
+            var tile_layer_3b2b5d4b35d2b0b9c0321ddb66df0c80 = L.tileLayer(
+                "https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png",
+                {
+  "minZoom": 2.5,
+  "maxZoom": 20,
+  "maxNativeZoom": 20,
+  "noWrap": false,
+  "attribution": "\u0026copy; \u003ca href=\"https://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors \u0026copy; \u003ca href=\"https://carto.com/attributions\"\u003eCARTO\u003c/a\u003e",
+  "subdomains": "abcd",
+  "detectRetina": false,
+  "tms": false,
+  "opacity": 1,
+}
+
+            );
+        
+    
+            tile_layer_3b2b5d4b35d2b0b9c0321ddb66df0c80.addTo(map_44247aeda3b5c3b0da6774514a2ab918);
+        
+    
+            var circle_marker_837397a8894e5157ee60a371165e3286 = L.circleMarker(
+                [43.6534817, -79.3839347],
+                {"bubblingMouseEvents": true, "color": "orange", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "orange", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_44247aeda3b5c3b0da6774514a2ab918);
+        
+    
+        var popup_7e6fe559b1ff0fe3ed6926a14a256f1a = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_bb835ae3e6d0af4e36eea72e0f9e8976 = $(`<div id="html_bb835ae3e6d0af4e36eea72e0f9e8976" style="width: 100.0%; height: 100.0%;"><a href="https://en.wikipedia.org/wiki/BlueDot" target="_blank">BlueDot</a><br>Toronto , Canada<br><b>Founded: 2009</b></div>`)[0];
+                popup_7e6fe559b1ff0fe3ed6926a14a256f1a.setContent(html_bb835ae3e6d0af4e36eea72e0f9e8976);
+            
+        
+
+        circle_marker_837397a8894e5157ee60a371165e3286.bindPopup(popup_7e6fe559b1ff0fe3ed6926a14a256f1a)
+        ;
+
+        
+    
+    
+            circle_marker_837397a8894e5157ee60a371165e3286.bindTooltip(
+                `<div>
+                     BlueDot — Founded 2009
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_5b82d0f963859a385a2fb34f0be03c9c = L.circleMarker(
+                [43.6534817, -79.3839347],
+                {"bubblingMouseEvents": true, "color": "yellow", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "yellow", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_44247aeda3b5c3b0da6774514a2ab918);
+        
+    
+        var popup_98fd6daaa7c5f460c4921a5edb93bf59 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_e991d8fbb712adb396deec72194586d9 = $(`<div id="html_e991d8fbb712adb396deec72194586d9" style="width: 100.0%; height: 100.0%;"><a href="https://en.wikipedia.org/wiki/Cohere" target="_blank">Cohere</a><br>Toronto, Ontario , Canada<br><b>Founded: 2019</b></div>`)[0];
+                popup_98fd6daaa7c5f460c4921a5edb93bf59.setContent(html_e991d8fbb712adb396deec72194586d9);
+            
+        
+
+        circle_marker_5b82d0f963859a385a2fb34f0be03c9c.bindPopup(popup_98fd6daaa7c5f460c4921a5edb93bf59)
+        ;
+
+        
+    
+    
+            circle_marker_5b82d0f963859a385a2fb34f0be03c9c.bindTooltip(
+                `<div>
+                     Cohere — Founded 2019
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_f87e33ca536094fd6cc5d6cf889e5ebd = L.circleMarker(
+                [45.5031824, -73.5698065],
+                {"bubblingMouseEvents": true, "color": "yellow", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "yellow", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_44247aeda3b5c3b0da6774514a2ab918);
+        
+    
+        var popup_dd303a1bf81e99ed8c32ef0c4d9ca522 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_eb598506b872373a4903fc1912d7576d = $(`<div id="html_eb598506b872373a4903fc1912d7576d" style="width: 100.0%; height: 100.0%;"><a href="https://en.wikipedia.org/wiki/Element_AI" target="_blank">Element AI</a><br>Montreal , Quebec , Canada<br><b>Founded: 2016</b></div>`)[0];
+                popup_dd303a1bf81e99ed8c32ef0c4d9ca522.setContent(html_eb598506b872373a4903fc1912d7576d);
+            
+        
+
+        circle_marker_f87e33ca536094fd6cc5d6cf889e5ebd.bindPopup(popup_dd303a1bf81e99ed8c32ef0c4d9ca522)
+        ;
+
+        
+    
+    
+            circle_marker_f87e33ca536094fd6cc5d6cf889e5ebd.bindTooltip(
+                `<div>
+                     Element AI — Founded 2016
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_dfaa64ea6fa17e648f4969abf80e69cf = L.circleMarker(
+                [45.5031824, -73.5698065],
+                {"bubblingMouseEvents": true, "color": "yellow", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "yellow", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_44247aeda3b5c3b0da6774514a2ab918);
+        
+    
+        var popup_69aa11f85e48c3793a69a92efc715ff8 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_4500f24df971210f70ea690a544113d0 = $(`<div id="html_4500f24df971210f70ea690a544113d0" style="width: 100.0%; height: 100.0%;"><a href="https://en.wikipedia.org/wiki/Maluuba" target="_blank">Maluuba</a><br>Montreal, Quebec , Canada<br><b>Founded: 2011</b></div>`)[0];
+                popup_69aa11f85e48c3793a69a92efc715ff8.setContent(html_4500f24df971210f70ea690a544113d0);
+            
+        
+
+        circle_marker_dfaa64ea6fa17e648f4969abf80e69cf.bindPopup(popup_69aa11f85e48c3793a69a92efc715ff8)
+        ;
+
+        
+    
+    
+            circle_marker_dfaa64ea6fa17e648f4969abf80e69cf.bindTooltip(
+                `<div>
+                     Maluuba — Founded 2011
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_806300e125d1f996ca6b879c6ac6f945 = L.circleMarker(
+                [40.7127281, -74.0060152],
+                {"bubblingMouseEvents": true, "color": "yellow", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "yellow", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_44247aeda3b5c3b0da6774514a2ab918);
+        
+    
+        var popup_0893832c0d39b0ebd86bd4f046244dc6 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_72b76665db52ede1446c4cd14e572428 = $(`<div id="html_72b76665db52ede1446c4cd14e572428" style="width: 100.0%; height: 100.0%;"><a href="https://en.wikipedia.org/wiki/Caper_AI" target="_blank">Caper AI</a><br>New York, US<br><b>Founded: 2016</b></div>`)[0];
+                popup_0893832c0d39b0ebd86bd4f046244dc6.setContent(html_72b76665db52ede1446c4cd14e572428);
+            
+        
+
+        circle_marker_806300e125d1f996ca6b879c6ac6f945.bindPopup(popup_0893832c0d39b0ebd86bd4f046244dc6)
+        ;
+
+        
+    
+    
+            circle_marker_806300e125d1f996ca6b879c6ac6f945.bindTooltip(
+                `<div>
+                     Caper AI — Founded 2016
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_f03bd4ce9e05ea9be62ca63ac0cf6020 = L.circleMarker(
+                [42.5048167, -71.1956111],
+                {"bubblingMouseEvents": true, "color": "yellow", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "yellow", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_44247aeda3b5c3b0da6774514a2ab918);
+        
+    
+        var popup_14ceba5e25b223fa2f3016851ba1ecec = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_25cd5b98c5b458ecf034e318a083fc29 = $(`<div id="html_25cd5b98c5b458ecf034e318a083fc29" style="width: 100.0%; height: 100.0%;"><a href="https://en.wikipedia.org/wiki/Cerence" target="_blank">Cerence</a><br>Burlington, Massachusetts , U.S.<br><b>Founded: 2019</b></div>`)[0];
+                popup_14ceba5e25b223fa2f3016851ba1ecec.setContent(html_25cd5b98c5b458ecf034e318a083fc29);
+            
+        
+
+        circle_marker_f03bd4ce9e05ea9be62ca63ac0cf6020.bindPopup(popup_14ceba5e25b223fa2f3016851ba1ecec)
+        ;
+
+        
+    
+    
+            circle_marker_f03bd4ce9e05ea9be62ca63ac0cf6020.bindTooltip(
+                `<div>
+                     Cerence — Founded 2019
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_a7443a117702e4e65e05fb720239efd2 = L.circleMarker(
+                [37.7879363, -122.4075201],
+                {"bubblingMouseEvents": true, "color": "green", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "green", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_44247aeda3b5c3b0da6774514a2ab918);
+        
+    
+        var popup_0259b298009cdce6af4855e321455acb = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_3198bd4156be87ee5737bc51c631b824 = $(`<div id="html_3198bd4156be87ee5737bc51c631b824" style="width: 100.0%; height: 100.0%;"><a href="https://en.wikipedia.org/wiki/Cognition_AI" target="_blank">Cognition AI</a><br>San Francisco , California , United States<br><b>Founded: 2023</b></div>`)[0];
+                popup_0259b298009cdce6af4855e321455acb.setContent(html_3198bd4156be87ee5737bc51c631b824);
+            
+        
+
+        circle_marker_a7443a117702e4e65e05fb720239efd2.bindPopup(popup_0259b298009cdce6af4855e321455acb)
+        ;
+
+        
+    
+    
+            circle_marker_a7443a117702e4e65e05fb720239efd2.bindTooltip(
+                `<div>
+                     Cognition AI — Founded 2023
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_844b30a4f1e7cde41e60701199ecc359 = L.circleMarker(
+                [37.8314089, -122.2865266],
+                {"bubblingMouseEvents": true, "color": "yellow", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "yellow", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_44247aeda3b5c3b0da6774514a2ab918);
+        
+    
+        var popup_7bf0ffc8c237249b2306b7f4f74ea99f = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_4b332c867dc0bf5095eeef5594660b03 = $(`<div id="html_4b332c867dc0bf5095eeef5594660b03" style="width: 100.0%; height: 100.0%;"><a href="https://en.wikipedia.org/wiki/Covariant_(company)" target="_blank">Covariant</a><br>Emeryville, California<br><b>Founded: 2017</b></div>`)[0];
+                popup_7bf0ffc8c237249b2306b7f4f74ea99f.setContent(html_4b332c867dc0bf5095eeef5594660b03);
+            
+        
+
+        circle_marker_844b30a4f1e7cde41e60701199ecc359.bindPopup(popup_7bf0ffc8c237249b2306b7f4f74ea99f)
+        ;
+
+        
+    
+    
+            circle_marker_844b30a4f1e7cde41e60701199ecc359.bindTooltip(
+                `<div>
+                     Covariant — Founded 2017
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_a436904bffea8c049e53dba750e580f0 = L.circleMarker(
+                [37.4443293, -122.1598465],
+                {"bubblingMouseEvents": true, "color": "yellow", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "yellow", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_44247aeda3b5c3b0da6774514a2ab918);
+        
+    
+        var popup_7dc1e3ece42e42e09cda92809990dca3 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_525b80f0d8df61f2de826c4cc04d7fd8 = $(`<div id="html_525b80f0d8df61f2de826c4cc04d7fd8" style="width: 100.0%; height: 100.0%;"><a href="https://en.wikipedia.org/wiki/Glean_Technologies" target="_blank">Glean Technologies</a><br>Palo Alto, California<br><b>Founded: 2019</b></div>`)[0];
+                popup_7dc1e3ece42e42e09cda92809990dca3.setContent(html_525b80f0d8df61f2de826c4cc04d7fd8);
+            
+        
+
+        circle_marker_a436904bffea8c049e53dba750e580f0.bindPopup(popup_7dc1e3ece42e42e09cda92809990dca3)
+        ;
+
+        
+    
+    
+            circle_marker_a436904bffea8c049e53dba750e580f0.bindTooltip(
+                `<div>
+                     Glean Technologies — Founded 2019
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_11bf5a975757ebfe84a07b2ce1a17247 = L.circleMarker(
+                [34.0536909, -118.242766],
+                {"bubblingMouseEvents": true, "color": "green", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "green", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_44247aeda3b5c3b0da6774514a2ab918);
+        
+    
+        var popup_ba56b374845a3fcd50a3fae3a7b34b94 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_5c6bd9eaf36fd8e3bbb4d289cb17d02e = $(`<div id="html_5c6bd9eaf36fd8e3bbb4d289cb17d02e" style="width: 100.0%; height: 100.0%;"><a href="https://en.wikipedia.org/wiki/HeyGen" target="_blank">HeyGen</a><br>Los Angeles, California , U.S.<br><b>Founded: 2020</b></div>`)[0];
+                popup_ba56b374845a3fcd50a3fae3a7b34b94.setContent(html_5c6bd9eaf36fd8e3bbb4d289cb17d02e);
+            
+        
+
+        circle_marker_11bf5a975757ebfe84a07b2ce1a17247.bindPopup(popup_ba56b374845a3fcd50a3fae3a7b34b94)
+        ;
+
+        
+    
+    
+            circle_marker_11bf5a975757ebfe84a07b2ce1a17247.bindTooltip(
+                `<div>
+                     HeyGen — Founded 2020
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_9b3fe3f0985031a3c068a27ae4313bc1 = L.circleMarker(
+                [40.7579554, -73.9855319],
+                {"bubblingMouseEvents": true, "color": "yellow", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "yellow", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_44247aeda3b5c3b0da6774514a2ab918);
+        
+    
+        var popup_8bc69f0445083a0ba938190611ff2cf3 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_c22190358fd36f81099b64c5324f428d = $(`<div id="html_c22190358fd36f81099b64c5324f428d" style="width: 100.0%; height: 100.0%;"><a href="https://en.wikipedia.org/wiki/Hugging_Face" target="_blank">Hugging Face</a><br>Manhattan , New York City<br><b>Founded: 2016</b></div>`)[0];
+                popup_8bc69f0445083a0ba938190611ff2cf3.setContent(html_c22190358fd36f81099b64c5324f428d);
+            
+        
+
+        circle_marker_9b3fe3f0985031a3c068a27ae4313bc1.bindPopup(popup_8bc69f0445083a0ba938190611ff2cf3)
+        ;
+
+        
+    
+    
+            circle_marker_9b3fe3f0985031a3c068a27ae4313bc1.bindTooltip(
+                `<div>
+                     Hugging Face — Founded 2016
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_2c6d6bf0d21e43800b966b97ec0d7c72 = L.circleMarker(
+                [37.4443293, -122.1598465],
+                {"bubblingMouseEvents": true, "color": "green", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "green", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_44247aeda3b5c3b0da6774514a2ab918);
+        
+    
+        var popup_608de72084d4e264b90035a9c3324f9f = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_5e5b7fcf693d510af0035a1ac9eb941c = $(`<div id="html_5e5b7fcf693d510af0035a1ac9eb941c" style="width: 100.0%; height: 100.0%;"><a href="https://en.wikipedia.org/wiki/Inflection_AI" target="_blank">Inflection AI</a><br>Palo Alto, California , U.S.<br><b>Founded: 2022</b></div>`)[0];
+                popup_608de72084d4e264b90035a9c3324f9f.setContent(html_5e5b7fcf693d510af0035a1ac9eb941c);
+            
+        
+
+        circle_marker_2c6d6bf0d21e43800b966b97ec0d7c72.bindPopup(popup_608de72084d4e264b90035a9c3324f9f)
+        ;
+
+        
+    
+    
+            circle_marker_2c6d6bf0d21e43800b966b97ec0d7c72.bindTooltip(
+                `<div>
+                     Inflection AI — Founded 2022
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_c1e7b4b8365a2881da38c987fc44f300 = L.circleMarker(
+                [37.7898002, -122.3953496],
+                {"bubblingMouseEvents": true, "color": "green", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "green", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_44247aeda3b5c3b0da6774514a2ab918);
+        
+    
+        var popup_3ed1e489f6adca445bdc2da2afe53cd0 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_7c71433397fd4afa80f08208bf58060a = $(`<div id="html_7c71433397fd4afa80f08208bf58060a" style="width: 100.0%; height: 100.0%;"><a href="https://en.wikipedia.org/wiki/Mercor" target="_blank">Mercor</a><br>181 Fremont , San Francisco , California , United States<br><b>Founded: 2023</b></div>`)[0];
+                popup_3ed1e489f6adca445bdc2da2afe53cd0.setContent(html_7c71433397fd4afa80f08208bf58060a);
+            
+        
+
+        circle_marker_c1e7b4b8365a2881da38c987fc44f300.bindPopup(popup_3ed1e489f6adca445bdc2da2afe53cd0)
+        ;
+
+        
+    
+    
+            circle_marker_c1e7b4b8365a2881da38c987fc44f300.bindTooltip(
+                `<div>
+                     Mercor — Founded 2023
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_e36d7f34d7a670956e7468b192bb473f = L.circleMarker(
+                [40.7298497, -73.9913897],
+                {"bubblingMouseEvents": true, "color": "yellow", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "yellow", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_44247aeda3b5c3b0da6774514a2ab918);
+        
+    
+        var popup_5443d02b93fae62642d621cecf280900 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_d27bed920a598a1eef5e585da1d16cb6 = $(`<div id="html_d27bed920a598a1eef5e585da1d16cb6" style="width: 100.0%; height: 100.0%;"><a href="https://en.wikipedia.org/wiki/Meta_AI" target="_blank">Meta AI</a><br>Astor Place , New York City , New York , U.S.<br><b>Founded: 2015</b></div>`)[0];
+                popup_5443d02b93fae62642d621cecf280900.setContent(html_d27bed920a598a1eef5e585da1d16cb6);
+            
+        
+
+        circle_marker_e36d7f34d7a670956e7468b192bb473f.bindPopup(popup_5443d02b93fae62642d621cecf280900)
+        ;
+
+        
+    
+    
+            circle_marker_e36d7f34d7a670956e7468b192bb473f.bindTooltip(
+                `<div>
+                     Meta AI — Founded 2015
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_99b2bf50161fd14b6c35fe5abf5fd426 = L.circleMarker(
+                [47.6694141, -122.1238767],
+                {"bubblingMouseEvents": true, "color": "green", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "green", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_44247aeda3b5c3b0da6774514a2ab918);
+        
+    
+        var popup_31a4fcc293f5f2200f31df3949dd380f = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_0a7bf226fee443253e1180996727e0e6 = $(`<div id="html_0a7bf226fee443253e1180996727e0e6" style="width: 100.0%; height: 100.0%;"><a href="https://en.wikipedia.org/wiki/Microsoft_AI" target="_blank">Microsoft AI</a><br>Redmond, Washington , United States<br><b>Founded: 2024</b></div>`)[0];
+                popup_31a4fcc293f5f2200f31df3949dd380f.setContent(html_0a7bf226fee443253e1180996727e0e6);
+            
+        
+
+        circle_marker_99b2bf50161fd14b6c35fe5abf5fd426.bindPopup(popup_31a4fcc293f5f2200f31df3949dd380f)
+        ;
+
+        
+    
+    
+            circle_marker_99b2bf50161fd14b6c35fe5abf5fd426.bindTooltip(
+                `<div>
+                     Microsoft AI — Founded 2024
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_f554c3a5d7ab9e8f1f4dbdf1a1f6ed47 = L.circleMarker(
+                [37.7947862, -122.4057808],
+                {"bubblingMouseEvents": true, "color": "green", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "green", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_44247aeda3b5c3b0da6774514a2ab918);
+        
+    
+        var popup_73536f4c509611e0c66ac0f3be457f18 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_1cb9f7856076e58306fd7cbdca94a7b2 = $(`<div id="html_1cb9f7856076e58306fd7cbdca94a7b2" style="width: 100.0%; height: 100.0%;"><a href="https://en.wikipedia.org/wiki/Perplexity_AI" target="_blank">Perplexity AI</a><br>San Francisco , California, U.S. [ 2 ]<br><b>Founded: 2022</b></div>`)[0];
+                popup_73536f4c509611e0c66ac0f3be457f18.setContent(html_1cb9f7856076e58306fd7cbdca94a7b2);
+            
+        
+
+        circle_marker_f554c3a5d7ab9e8f1f4dbdf1a1f6ed47.bindPopup(popup_73536f4c509611e0c66ac0f3be457f18)
+        ;
+
+        
+    
+    
+            circle_marker_f554c3a5d7ab9e8f1f4dbdf1a1f6ed47.bindTooltip(
+                `<div>
+                     Perplexity AI — Founded 2022
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_bc3324b987769eaab7038fe1cde98853 = L.circleMarker(
+                [43.0594237, -88.4040172],
+                {"bubblingMouseEvents": true, "color": "yellow", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "yellow", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_44247aeda3b5c3b0da6774514a2ab918);
+        
+    
+        var popup_de32aa50182dc617e45475eb9d25c4d2 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_4c3e7d0368a1521aae2c2638ba99a9be = $(`<div id="html_4c3e7d0368a1521aae2c2638ba99a9be" style="width: 100.0%; height: 100.0%;"><a href="https://en.wikipedia.org/wiki/RAIC_Labs" target="_blank">RAIC Labs</a><br>Delafield, WI , United States<br><b>Founded: 2019</b></div>`)[0];
+                popup_de32aa50182dc617e45475eb9d25c4d2.setContent(html_4c3e7d0368a1521aae2c2638ba99a9be);
+            
+        
+
+        circle_marker_bc3324b987769eaab7038fe1cde98853.bindPopup(popup_de32aa50182dc617e45475eb9d25c4d2)
+        ;
+
+        
+    
+    
+            circle_marker_bc3324b987769eaab7038fe1cde98853.bindTooltip(
+                `<div>
+                     RAIC Labs — Founded 2019
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_e3706c9106af41df40899bebcb769d09 = L.circleMarker(
+                [40.7579554, -73.9855319],
+                {"bubblingMouseEvents": true, "color": "yellow", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "yellow", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_44247aeda3b5c3b0da6774514a2ab918);
+        
+    
+        var popup_9e7322626af28d009de77ba9c2d7d0e4 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_b37f7011e934e8aecce7db7f9fc2d0d2 = $(`<div id="html_b37f7011e934e8aecce7db7f9fc2d0d2" style="width: 100.0%; height: 100.0%;"><a href="https://en.wikipedia.org/wiki/Runway_(company)" target="_blank">Runway</a><br>Manhattan , New York City , U.S.<br><b>Founded: 2018</b></div>`)[0];
+                popup_9e7322626af28d009de77ba9c2d7d0e4.setContent(html_b37f7011e934e8aecce7db7f9fc2d0d2);
+            
+        
+
+        circle_marker_e3706c9106af41df40899bebcb769d09.bindPopup(popup_9e7322626af28d009de77ba9c2d7d0e4)
+        ;
+
+        
+    
+    
+            circle_marker_e3706c9106af41df40899bebcb769d09.bindTooltip(
+                `<div>
+                     Runway — Founded 2018
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_b4f7cf975cb4a417009567503df31973 = L.circleMarker(
+                [37.7879363, -122.4075201],
+                {"bubblingMouseEvents": true, "color": "yellow", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "yellow", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_44247aeda3b5c3b0da6774514a2ab918);
+        
+    
+        var popup_603036a6abf5de0ee9f144759b8a3216 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_5f2bed7c05ed405626d563865f168add = $(`<div id="html_5f2bed7c05ed405626d563865f168add" style="width: 100.0%; height: 100.0%;"><a href="https://en.wikipedia.org/wiki/Scale_AI" target="_blank">Scale AI</a><br>San Francisco, California , United States<br><b>Founded: 2016</b></div>`)[0];
+                popup_603036a6abf5de0ee9f144759b8a3216.setContent(html_5f2bed7c05ed405626d563865f168add);
+            
+        
+
+        circle_marker_b4f7cf975cb4a417009567503df31973.bindPopup(popup_603036a6abf5de0ee9f144759b8a3216)
+        ;
+
+        
+    
+    
+            circle_marker_b4f7cf975cb4a417009567503df31973.bindTooltip(
+                `<div>
+                     Scale AI — Founded 2016
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_2b43401e44f58944548d8c96ac761630 = L.circleMarker(
+                [37.7879363, -122.4075201],
+                {"bubblingMouseEvents": true, "color": "green", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "green", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_44247aeda3b5c3b0da6774514a2ab918);
+        
+    
+        var popup_013cc6afa014289932ceaa9c055cbcba = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_971963ccb36d3e5bd54517961e02c28b = $(`<div id="html_971963ccb36d3e5bd54517961e02c28b" style="width: 100.0%; height: 100.0%;"><a href="https://en.wikipedia.org/wiki/Thinking_Machines_Lab" target="_blank">Thinking Machines Lab</a><br>San Francisco, California , United States<br><b>Founded: 2025</b></div>`)[0];
+                popup_013cc6afa014289932ceaa9c055cbcba.setContent(html_971963ccb36d3e5bd54517961e02c28b);
+            
+        
+
+        circle_marker_2b43401e44f58944548d8c96ac761630.bindPopup(popup_013cc6afa014289932ceaa9c055cbcba)
+        ;
+
+        
+    
+    
+            circle_marker_2b43401e44f58944548d8c96ac761630.bindTooltip(
+                `<div>
+                     Thinking Machines Lab — Founded 2025
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_771de84a37005119bf6e495a32279338 = L.circleMarker(
+                [37.7879363, -122.4075201],
+                {"bubblingMouseEvents": true, "color": "green", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "green", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_44247aeda3b5c3b0da6774514a2ab918);
+        
+    
+        var popup_d440972cb381fd8fb57a0acacf9d2337 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_8f5a7a9c747d8f4e4527cbe1aa663fb4 = $(`<div id="html_8f5a7a9c747d8f4e4527cbe1aa663fb4" style="width: 100.0%; height: 100.0%;"><a href="https://en.wikipedia.org/wiki/Writesonic" target="_blank">Writesonic</a><br>San Francisco, California , United States<br><b>Founded: 2020</b></div>`)[0];
+                popup_d440972cb381fd8fb57a0acacf9d2337.setContent(html_8f5a7a9c747d8f4e4527cbe1aa663fb4);
+            
+        
+
+        circle_marker_771de84a37005119bf6e495a32279338.bindPopup(popup_d440972cb381fd8fb57a0acacf9d2337)
+        ;
+
+        
+    
+    
+            circle_marker_771de84a37005119bf6e495a32279338.bindTooltip(
+                `<div>
+                     Writesonic — Founded 2020
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_93f7de1b3c7478c7cb3a54bc7228219f = L.circleMarker(
+                [39.9057136, 116.3912972],
+                {"bubblingMouseEvents": true, "color": "green", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "green", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_44247aeda3b5c3b0da6774514a2ab918);
+        
+    
+        var popup_e18b841f97804ebc7b7272a5328db5d7 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_361d0b059c109192574f3192dc3dbb14 = $(`<div id="html_361d0b059c109192574f3192dc3dbb14" style="width: 100.0%; height: 100.0%;"><a href="https://en.wikipedia.org/wiki/01.AI" target="_blank">01.AI</a><br>Beijing , China<br><b>Founded: 2023</b></div>`)[0];
+                popup_e18b841f97804ebc7b7272a5328db5d7.setContent(html_361d0b059c109192574f3192dc3dbb14);
+            
+        
+
+        circle_marker_93f7de1b3c7478c7cb3a54bc7228219f.bindPopup(popup_e18b841f97804ebc7b7272a5328db5d7)
+        ;
+
+        
+    
+    
+            circle_marker_93f7de1b3c7478c7cb3a54bc7228219f.bindTooltip(
+                `<div>
+                     01.AI — Founded 2023
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_516ba0dfed32c48576b5ee77620a9d34 = L.circleMarker(
+                [39.9057136, 116.3912972],
+                {"bubblingMouseEvents": true, "color": "yellow", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "yellow", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_44247aeda3b5c3b0da6774514a2ab918);
+        
+    
+        var popup_d90316fd60ea98fad0f4f9e83c8b562b = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_0822dd1cbae9ea8fcb88b714c10f4bec = $(`<div id="html_0822dd1cbae9ea8fcb88b714c10f4bec" style="width: 100.0%; height: 100.0%;"><a href="https://en.wikipedia.org/wiki/4Paradigm" target="_blank">4Paradigm</a><br>Beijing , China<br><b>Founded: 2014</b></div>`)[0];
+                popup_d90316fd60ea98fad0f4f9e83c8b562b.setContent(html_0822dd1cbae9ea8fcb88b714c10f4bec);
+            
+        
+
+        circle_marker_516ba0dfed32c48576b5ee77620a9d34.bindPopup(popup_d90316fd60ea98fad0f4f9e83c8b562b)
+        ;
+
+        
+    
+    
+            circle_marker_516ba0dfed32c48576b5ee77620a9d34.bindTooltip(
+                `<div>
+                     4Paradigm — Founded 2014
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_82e5353d2987a2156725bdfb2b1f9121 = L.circleMarker(
+                [39.9057136, 116.3912972],
+                {"bubblingMouseEvents": true, "color": "green", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "green", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_44247aeda3b5c3b0da6774514a2ab918);
+        
+    
+        var popup_a940baca3459d9e8ee896767c3a19f20 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_4c18055e7f90cef9b784396fbe108569 = $(`<div id="html_4c18055e7f90cef9b784396fbe108569" style="width: 100.0%; height: 100.0%;"><a href="https://en.wikipedia.org/wiki/Baichuan" target="_blank">Baichuan</a><br>Beijing , China<br><b>Founded: 2023</b></div>`)[0];
+                popup_a940baca3459d9e8ee896767c3a19f20.setContent(html_4c18055e7f90cef9b784396fbe108569);
+            
+        
+
+        circle_marker_82e5353d2987a2156725bdfb2b1f9121.bindPopup(popup_a940baca3459d9e8ee896767c3a19f20)
+        ;
+
+        
+    
+    
+            circle_marker_82e5353d2987a2156725bdfb2b1f9121.bindTooltip(
+                `<div>
+                     Baichuan — Founded 2023
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_052845b7d6deb101684980f54baedc6d = L.circleMarker(
+                [30.2489634, 120.2052342],
+                {"bubblingMouseEvents": true, "color": "green", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "green", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_44247aeda3b5c3b0da6774514a2ab918);
+        
+    
+        var popup_6af5228c973e96a060922ad9e26cf509 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_cf1eeaad98331b2d2af8a2325d1601b6 = $(`<div id="html_cf1eeaad98331b2d2af8a2325d1601b6" style="width: 100.0%; height: 100.0%;"><a href="https://en.wikipedia.org/wiki/DeepSeek" target="_blank">DeepSeek</a><br>Hangzhou , Zhejiang , China<br><b>Founded: 2023</b></div>`)[0];
+                popup_6af5228c973e96a060922ad9e26cf509.setContent(html_cf1eeaad98331b2d2af8a2325d1601b6);
+            
+        
+
+        circle_marker_052845b7d6deb101684980f54baedc6d.bindPopup(popup_6af5228c973e96a060922ad9e26cf509)
+        ;
+
+        
+    
+    
+            circle_marker_052845b7d6deb101684980f54baedc6d.bindTooltip(
+                `<div>
+                     DeepSeek — Founded 2023
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_f13b177962b9d13f4e942a8d24f244e1 = L.circleMarker(
+                [31.2312707, 121.4700152],
+                {"bubblingMouseEvents": true, "color": "green", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "green", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_44247aeda3b5c3b0da6774514a2ab918);
+        
+    
+        var popup_0575024e9c0e685632ee3f2c7515c76a = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_287a0e87e73b793f363266e18aafad5f = $(`<div id="html_287a0e87e73b793f363266e18aafad5f" style="width: 100.0%; height: 100.0%;"><a href="https://en.wikipedia.org/wiki/MiniMax_(company)" target="_blank">MiniMax</a><br>Shanghai , China<br><b>Founded: 2021</b></div>`)[0];
+                popup_0575024e9c0e685632ee3f2c7515c76a.setContent(html_287a0e87e73b793f363266e18aafad5f);
+            
+        
+
+        circle_marker_f13b177962b9d13f4e942a8d24f244e1.bindPopup(popup_0575024e9c0e685632ee3f2c7515c76a)
+        ;
+
+        
+    
+    
+            circle_marker_f13b177962b9d13f4e942a8d24f244e1.bindTooltip(
+                `<div>
+                     MiniMax — Founded 2021
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_e32057b363a9cda9543e230516bf6922 = L.circleMarker(
+                [39.9057136, 116.3912972],
+                {"bubblingMouseEvents": true, "color": "green", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "green", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_44247aeda3b5c3b0da6774514a2ab918);
+        
+    
+        var popup_b86fe91668ba30cd56edc10c1833cc74 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_68f33d4fb826753864d6c92731fc3351 = $(`<div id="html_68f33d4fb826753864d6c92731fc3351" style="width: 100.0%; height: 100.0%;"><a href="https://en.wikipedia.org/wiki/Moonshot_AI" target="_blank">Moonshot AI</a><br>Beijing , China<br><b>Founded: 2023</b></div>`)[0];
+                popup_b86fe91668ba30cd56edc10c1833cc74.setContent(html_68f33d4fb826753864d6c92731fc3351);
+            
+        
+
+        circle_marker_e32057b363a9cda9543e230516bf6922.bindPopup(popup_b86fe91668ba30cd56edc10c1833cc74)
+        ;
+
+        
+    
+    
+            circle_marker_e32057b363a9cda9543e230516bf6922.bindTooltip(
+                `<div>
+                     Moonshot AI — Founded 2023
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_6cba25adfe02574f4bc6d6e362f6da23 = L.circleMarker(
+                [22.4241563, 114.2114985],
+                {"bubblingMouseEvents": true, "color": "yellow", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "yellow", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_44247aeda3b5c3b0da6774514a2ab918);
+        
+    
+        var popup_ba8692fbfb41496405a36ba7d3102f18 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_b3ff8e71fa5dc3dd103de2b2219b71cc = $(`<div id="html_b3ff8e71fa5dc3dd103de2b2219b71cc" style="width: 100.0%; height: 100.0%;"><a href="https://en.wikipedia.org/wiki/SenseTime" target="_blank">SenseTime</a><br>Science Park , Hong Kong<br><b>Founded: 2014</b></div>`)[0];
+                popup_ba8692fbfb41496405a36ba7d3102f18.setContent(html_b3ff8e71fa5dc3dd103de2b2219b71cc);
+            
+        
+
+        circle_marker_6cba25adfe02574f4bc6d6e362f6da23.bindPopup(popup_ba8692fbfb41496405a36ba7d3102f18)
+        ;
+
+        
+    
+    
+            circle_marker_6cba25adfe02574f4bc6d6e362f6da23.bindTooltip(
+                `<div>
+                     SenseTime — Founded 2014
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_a40b7f01f5cc5cd511df27cfe047217a = L.circleMarker(
+                [31.2312707, 121.4700152],
+                {"bubblingMouseEvents": true, "color": "green", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "green", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_44247aeda3b5c3b0da6774514a2ab918);
+        
+    
+        var popup_0ee206dc11aabcebb9d31e2bb5263802 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_4c4dc0b27e49ac3ce6dceb8be06485fa = $(`<div id="html_4c4dc0b27e49ac3ce6dceb8be06485fa" style="width: 100.0%; height: 100.0%;"><a href="https://en.wikipedia.org/wiki/StepFun" target="_blank">StepFun</a><br>Shanghai , China<br><b>Founded: 2023</b></div>`)[0];
+                popup_0ee206dc11aabcebb9d31e2bb5263802.setContent(html_4c4dc0b27e49ac3ce6dceb8be06485fa);
+            
+        
+
+        circle_marker_a40b7f01f5cc5cd511df27cfe047217a.bindPopup(popup_0ee206dc11aabcebb9d31e2bb5263802)
+        ;
+
+        
+    
+    
+            circle_marker_a40b7f01f5cc5cd511df27cfe047217a.bindTooltip(
+                `<div>
+                     StepFun — Founded 2023
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_acab1e4e9c2dbe1098f3c133345f217c = L.circleMarker(
+                [39.9057136, 116.3912972],
+                {"bubblingMouseEvents": true, "color": "yellow", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "yellow", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_44247aeda3b5c3b0da6774514a2ab918);
+        
+    
+        var popup_19c139d401422be53e5598682229649f = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_b22044c441185e1be6869083a1d681f7 = $(`<div id="html_b22044c441185e1be6869083a1d681f7" style="width: 100.0%; height: 100.0%;"><a href="https://en.wikipedia.org/wiki/Zhipu_AI" target="_blank">Zhipu AI</a><br>Beijing , China<br><b>Founded: 2019</b></div>`)[0];
+                popup_19c139d401422be53e5598682229649f.setContent(html_b22044c441185e1be6869083a1d681f7);
+            
+        
+
+        circle_marker_acab1e4e9c2dbe1098f3c133345f217c.bindPopup(popup_19c139d401422be53e5598682229649f)
+        ;
+
+        
+    
+    
+            circle_marker_acab1e4e9c2dbe1098f3c133345f217c.bindTooltip(
+                `<div>
+                     Zhipu AI — Founded 2019
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_b65ce96ee9eff06593990631686b64a7 = L.circleMarker(
+                [22.2865158, 114.150208],
+                {"bubblingMouseEvents": true, "color": "green", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "green", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_44247aeda3b5c3b0da6774514a2ab918);
+        
+    
+        var popup_5836ef34fe137418451b226cb57bcc13 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_143e3b067b9d4c946c5527b591163e9f = $(`<div id="html_143e3b067b9d4c946c5527b591163e9f" style="width: 100.0%; height: 100.0%;"><a href="https://en.wikipedia.org/wiki/Artisse_AI" target="_blank">Artisse AI</a><br>Sheung Wan, Hong Kong<br><b>Founded: 2022</b></div>`)[0];
+                popup_5836ef34fe137418451b226cb57bcc13.setContent(html_143e3b067b9d4c946c5527b591163e9f);
+            
+        
+
+        circle_marker_b65ce96ee9eff06593990631686b64a7.bindPopup(popup_5836ef34fe137418451b226cb57bcc13)
+        ;
+
+        
+    
+    
+            circle_marker_b65ce96ee9eff06593990631686b64a7.bindTooltip(
+                `<div>
+                     Artisse AI — Founded 2022
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_bad3c41715ddde6fbf886d5964ea4899 = L.circleMarker(
+                [19.054999, 72.8692035],
+                {"bubblingMouseEvents": true, "color": "yellow", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "yellow", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_44247aeda3b5c3b0da6774514a2ab918);
+        
+    
+        var popup_7b8cc48d81b400a405fea7b1c3b56c2b = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_7ccc031babf197ea48b6fb6492a0af1c = $(`<div id="html_7ccc031babf197ea48b6fb6492a0af1c" style="width: 100.0%; height: 100.0%;"><a href="https://en.wikipedia.org/wiki/Haptik" target="_blank">Haptik</a><br>Mumbai , India<br><b>Founded: 2013</b></div>`)[0];
+                popup_7b8cc48d81b400a405fea7b1c3b56c2b.setContent(html_7ccc031babf197ea48b6fb6492a0af1c);
+            
+        
+
+        circle_marker_bad3c41715ddde6fbf886d5964ea4899.bindPopup(popup_7b8cc48d81b400a405fea7b1c3b56c2b)
+        ;
+
+        
+    
+    
+            circle_marker_bad3c41715ddde6fbf886d5964ea4899.bindTooltip(
+                `<div>
+                     Haptik — Founded 2013
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_23229808c87e0b47c33715d800452749 = L.circleMarker(
+                [12.9767936, 77.590082],
+                {"bubblingMouseEvents": true, "color": "green", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "green", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_44247aeda3b5c3b0da6774514a2ab918);
+        
+    
+        var popup_e4469360fd62436fb45d0b23f6a444e6 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_59c0244835efb95574c4889dd43db75a = $(`<div id="html_59c0244835efb95574c4889dd43db75a" style="width: 100.0%; height: 100.0%;"><a href="https://en.wikipedia.org/wiki/Sarvam_AI" target="_blank">Sarvam AI</a><br>Bengaluru , Karnataka , India<br><b>Founded: 2023</b></div>`)[0];
+                popup_e4469360fd62436fb45d0b23f6a444e6.setContent(html_59c0244835efb95574c4889dd43db75a);
+            
+        
+
+        circle_marker_23229808c87e0b47c33715d800452749.bindPopup(popup_e4469360fd62436fb45d0b23f6a444e6)
+        ;
+
+        
+    
+    
+            circle_marker_23229808c87e0b47c33715d800452749.bindTooltip(
+                `<div>
+                     Sarvam AI — Founded 2023
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_e9b12203e460541c5ad649427915540a = L.circleMarker(
+                [12.9767936, 77.590082],
+                {"bubblingMouseEvents": true, "color": "green", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "green", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_44247aeda3b5c3b0da6774514a2ab918);
+        
+    
+        var popup_cc5ce5853e87862bc13e205f79d08699 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_f215c62d2e545160097540ac92f58331 = $(`<div id="html_f215c62d2e545160097540ac92f58331" style="width: 100.0%; height: 100.0%;"><a href="https://en.wikipedia.org/wiki/NeuralGarage" target="_blank">NeuralGarage</a><br>Bangalore , India<br><b>Founded: 2021</b></div>`)[0];
+                popup_cc5ce5853e87862bc13e205f79d08699.setContent(html_f215c62d2e545160097540ac92f58331);
+            
+        
+
+        circle_marker_e9b12203e460541c5ad649427915540a.bindPopup(popup_cc5ce5853e87862bc13e205f79d08699)
+        ;
+
+        
+    
+    
+            circle_marker_e9b12203e460541c5ad649427915540a.bindTooltip(
+                `<div>
+                     NeuralGarage — Founded 2021
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_65d8352901fc29f27aca3d0d37c095b4 = L.circleMarker(
+                [32.0852997, 34.7818064],
+                {"bubblingMouseEvents": true, "color": "yellow", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "yellow", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_44247aeda3b5c3b0da6774514a2ab918);
+        
+    
+        var popup_868f87e72a0076c440ef305ae30b5fe3 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_e4f812ad9dea835e43663b6e7c34a70b = $(`<div id="html_e4f812ad9dea835e43663b6e7c34a70b" style="width: 100.0%; height: 100.0%;"><a href="https://en.wikipedia.org/wiki/AI21_Labs" target="_blank">AI21 Labs</a><br>Tel Aviv , Israel<br><b>Founded: 2017</b></div>`)[0];
+                popup_868f87e72a0076c440ef305ae30b5fe3.setContent(html_e4f812ad9dea835e43663b6e7c34a70b);
+            
+        
+
+        circle_marker_65d8352901fc29f27aca3d0d37c095b4.bindPopup(popup_868f87e72a0076c440ef305ae30b5fe3)
+        ;
+
+        
+    
+    
+            circle_marker_65d8352901fc29f27aca3d0d37c095b4.bindTooltip(
+                `<div>
+                     AI21 Labs — Founded 2017
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_36bd1b09d455dc635f8914b6018ce9c2 = L.circleMarker(
+                [35.6768601, 139.7638947],
+                {"bubblingMouseEvents": true, "color": "green", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "green", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_44247aeda3b5c3b0da6774514a2ab918);
+        
+    
+        var popup_58d37643aa78a65732f00831525daa3d = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_c271f4c021919844e6d4aba93f4d65bc = $(`<div id="html_c271f4c021919844e6d4aba93f4d65bc" style="width: 100.0%; height: 100.0%;"><a href="https://en.wikipedia.org/wiki/Sakana_AI" target="_blank">Sakana AI</a><br>Tokyo , Japan<br><b>Founded: 2023</b></div>`)[0];
+                popup_58d37643aa78a65732f00831525daa3d.setContent(html_c271f4c021919844e6d4aba93f4d65bc);
+            
+        
+
+        circle_marker_36bd1b09d455dc635f8914b6018ce9c2.bindPopup(popup_58d37643aa78a65732f00831525daa3d)
+        ;
+
+        
+    
+    
+            circle_marker_36bd1b09d455dc635f8914b6018ce9c2.bindTooltip(
+                `<div>
+                     Sakana AI — Founded 2023
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_dd369bbec11ae73da536327289b35433 = L.circleMarker(
+                [23.333333, 45.333333],
+                {"bubblingMouseEvents": true, "color": "green", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "green", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_44247aeda3b5c3b0da6774514a2ab918);
+        
+    
+        var popup_0e16e5c6574a0695dd08306ada0f0120 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_c8df7646f2e4ae16935ae0445d5ee308 = $(`<div id="html_c8df7646f2e4ae16935ae0445d5ee308" style="width: 100.0%; height: 100.0%;"><a href="https://en.wikipedia.org/wiki/Humain" target="_blank">Humain</a><br>Riyadh , Saudi Arabia<br><b>Founded: 2025</b></div>`)[0];
+                popup_0e16e5c6574a0695dd08306ada0f0120.setContent(html_c8df7646f2e4ae16935ae0445d5ee308);
+            
+        
+
+        circle_marker_dd369bbec11ae73da536327289b35433.bindPopup(popup_0e16e5c6574a0695dd08306ada0f0120)
+        ;
+
+        
+    
+    
+            circle_marker_dd369bbec11ae73da536327289b35433.bindTooltip(
+                `<div>
+                     Humain — Founded 2025
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_ad8b573e1b093806a3bb05c2368264f8 = L.circleMarker(
+                [37.2405741, 127.1785572],
+                {"bubblingMouseEvents": true, "color": "green", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "green", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_44247aeda3b5c3b0da6774514a2ab918);
+        
+    
+        var popup_31207222a54ee45c32e5c78e95258e32 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_d03aad8a8796ebe4508a2aae666422dc = $(`<div id="html_d03aad8a8796ebe4508a2aae666422dc" style="width: 100.0%; height: 100.0%;"><a href="https://en.wikipedia.org/wiki/Upstage_(company)" target="_blank">Upstage</a><br>Yongin , South Korea<br><b>Founded: 2020</b></div>`)[0];
+                popup_31207222a54ee45c32e5c78e95258e32.setContent(html_d03aad8a8796ebe4508a2aae666422dc);
+            
+        
+
+        circle_marker_ad8b573e1b093806a3bb05c2368264f8.bindPopup(popup_31207222a54ee45c32e5c78e95258e32)
+        ;
+
+        
+    
+    
+            circle_marker_ad8b573e1b093806a3bb05c2368264f8.bindTooltip(
+                `<div>
+                     Upstage — Founded 2020
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_b6d45dec712a06864b15c8f7a4e10d3c = L.circleMarker(
+                [40.7127281, -74.0060152],
+                {"bubblingMouseEvents": true, "color": "yellow", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "yellow", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_44247aeda3b5c3b0da6774514a2ab918);
+        
+    
+        var popup_46c33110f68cfa2e66a778a8cd22ae69 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_27afe8c05dbed909f478d29a18ff20ab = $(`<div id="html_27afe8c05dbed909f478d29a18ff20ab" style="width: 100.0%; height: 100.0%;"><a href="https://en.wikipedia.org/wiki/Dataiku" target="_blank">Dataiku</a><br>New York City , United States<br><b>Founded: 2013</b></div>`)[0];
+                popup_46c33110f68cfa2e66a778a8cd22ae69.setContent(html_27afe8c05dbed909f478d29a18ff20ab);
+            
+        
+
+        circle_marker_b6d45dec712a06864b15c8f7a4e10d3c.bindPopup(popup_46c33110f68cfa2e66a778a8cd22ae69)
+        ;
+
+        
+    
+    
+            circle_marker_b6d45dec712a06864b15c8f7a4e10d3c.bindTooltip(
+                `<div>
+                     Dataiku — Founded 2013
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_b391b6b1a689c1d26c9f08a65a78edce = L.circleMarker(
+                [40.7579554, -73.9855319],
+                {"bubblingMouseEvents": true, "color": "yellow", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "yellow", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_44247aeda3b5c3b0da6774514a2ab918);
+        
+    
+        var popup_a6add8b43be7d69f130095978bb65a1d = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_71a2759545a487dd26190fcaed55171c = $(`<div id="html_71a2759545a487dd26190fcaed55171c" style="width: 100.0%; height: 100.0%;"><a href="https://en.wikipedia.org/wiki/Hugging_Face" target="_blank">Hugging Face</a><br>Manhattan , New York City<br><b>Founded: 2016</b></div>`)[0];
+                popup_a6add8b43be7d69f130095978bb65a1d.setContent(html_71a2759545a487dd26190fcaed55171c);
+            
+        
+
+        circle_marker_b391b6b1a689c1d26c9f08a65a78edce.bindPopup(popup_a6add8b43be7d69f130095978bb65a1d)
+        ;
+
+        
+    
+    
+            circle_marker_b391b6b1a689c1d26c9f08a65a78edce.bindTooltip(
+                `<div>
+                     Hugging Face — Founded 2016
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_a5fd4f96745688270786081117d9bc81 = L.circleMarker(
+                [48.8588897, 2.320041],
+                {"bubblingMouseEvents": true, "color": "green", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "green", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_44247aeda3b5c3b0da6774514a2ab918);
+        
+    
+        var popup_7a577932b7d248c3f4e5b5e036b78b86 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_05865b17ec0eccb7819a7732f46ae915 = $(`<div id="html_05865b17ec0eccb7819a7732f46ae915" style="width: 100.0%; height: 100.0%;"><a href="https://en.wikipedia.org/wiki/H_(company)" target="_blank">H Company</a><br>Paris , France<br><b>Founded: 2023</b></div>`)[0];
+                popup_7a577932b7d248c3f4e5b5e036b78b86.setContent(html_05865b17ec0eccb7819a7732f46ae915);
+            
+        
+
+        circle_marker_a5fd4f96745688270786081117d9bc81.bindPopup(popup_7a577932b7d248c3f4e5b5e036b78b86)
+        ;
+
+        
+    
+    
+            circle_marker_a5fd4f96745688270786081117d9bc81.bindTooltip(
+                `<div>
+                     H Company — Founded 2023
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_2807383966d535f6752e283a523a85e4 = L.circleMarker(
+                [48.8588897, 2.320041],
+                {"bubblingMouseEvents": true, "color": "yellow", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "yellow", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_44247aeda3b5c3b0da6774514a2ab918);
+        
+    
+        var popup_449172291f499c80c8bd7ff52d7bda5f = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_71e26ba052c6b77f50381eeef60950b7 = $(`<div id="html_71e26ba052c6b77f50381eeef60950b7" style="width: 100.0%; height: 100.0%;"><a href="https://en.wikipedia.org/wiki/LightOn" target="_blank">LightOn</a><br>Paris , France<br><b>Founded: 2016</b></div>`)[0];
+                popup_449172291f499c80c8bd7ff52d7bda5f.setContent(html_71e26ba052c6b77f50381eeef60950b7);
+            
+        
+
+        circle_marker_2807383966d535f6752e283a523a85e4.bindPopup(popup_449172291f499c80c8bd7ff52d7bda5f)
+        ;
+
+        
+    
+    
+            circle_marker_2807383966d535f6752e283a523a85e4.bindTooltip(
+                `<div>
+                     LightOn — Founded 2016
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_ac4564d63aaf3d961956e5473c508a21 = L.circleMarker(
+                [48.8588897, 2.320041],
+                {"bubblingMouseEvents": true, "color": "orange", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "orange", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_44247aeda3b5c3b0da6774514a2ab918);
+        
+    
+        var popup_9a0ded3887774179c1158944482ea5ff = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_8ccca121c2c46b15f45f2c8288203f96 = $(`<div id="html_8ccca121c2c46b15f45f2c8288203f96" style="width: 100.0%; height: 100.0%;"><a href="https://en.wikipedia.org/wiki/Linagora" target="_blank">Linagora</a><br>Paris , France<br><b>Founded: 2000</b></div>`)[0];
+                popup_9a0ded3887774179c1158944482ea5ff.setContent(html_8ccca121c2c46b15f45f2c8288203f96);
+            
+        
+
+        circle_marker_ac4564d63aaf3d961956e5473c508a21.bindPopup(popup_9a0ded3887774179c1158944482ea5ff)
+        ;
+
+        
+    
+    
+            circle_marker_ac4564d63aaf3d961956e5473c508a21.bindTooltip(
+                `<div>
+                     Linagora — Founded 2000
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_1c888fc963e64f397bbfd4368674e5ec = L.circleMarker(
+                [48.8588897, 2.320041],
+                {"bubblingMouseEvents": true, "color": "green", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "green", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_44247aeda3b5c3b0da6774514a2ab918);
+        
+    
+        var popup_c86c0632ebc6b1965a76dff13389f6fb = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_3df792d80910005dc63cd5d8081abaec = $(`<div id="html_3df792d80910005dc63cd5d8081abaec" style="width: 100.0%; height: 100.0%;"><a href="https://en.wikipedia.org/wiki/Mistral_AI" target="_blank">Mistral AI</a><br>Paris , France<br><b>Founded: 2023</b></div>`)[0];
+                popup_c86c0632ebc6b1965a76dff13389f6fb.setContent(html_3df792d80910005dc63cd5d8081abaec);
+            
+        
+
+        circle_marker_1c888fc963e64f397bbfd4368674e5ec.bindPopup(popup_c86c0632ebc6b1965a76dff13389f6fb)
+        ;
+
+        
+    
+    
+            circle_marker_1c888fc963e64f397bbfd4368674e5ec.bindTooltip(
+                `<div>
+                     Mistral AI — Founded 2023
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_9159f2c28567defeca6b8ac9e0449117 = L.circleMarker(
+                [48.8588897, 2.320041],
+                {"bubblingMouseEvents": true, "color": "yellow", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "yellow", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_44247aeda3b5c3b0da6774514a2ab918);
+        
+    
+        var popup_9823204f6a6deb867d403bcbe7d32e34 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_87176af40d846a9fa455870d8c9576f8 = $(`<div id="html_87176af40d846a9fa455870d8c9576f8" style="width: 100.0%; height: 100.0%;"><a href="https://en.wikipedia.org/wiki/Owkin" target="_blank">Owkin</a><br>Paris , France<br><b>Founded: 2016</b></div>`)[0];
+                popup_9823204f6a6deb867d403bcbe7d32e34.setContent(html_87176af40d846a9fa455870d8c9576f8);
+            
+        
+
+        circle_marker_9159f2c28567defeca6b8ac9e0449117.bindPopup(popup_9823204f6a6deb867d403bcbe7d32e34)
+        ;
+
+        
+    
+    
+            circle_marker_9159f2c28567defeca6b8ac9e0449117.bindTooltip(
+                `<div>
+                     Owkin — Founded 2016
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_9ea6bf0472a4ee44bbcbfa447001c8d1 = L.circleMarker(
+                [35.6892468, -105.9367781],
+                {"bubblingMouseEvents": true, "color": "green", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "green", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_44247aeda3b5c3b0da6774514a2ab918);
+        
+    
+        var popup_92c044c73409b79bc167bdaa164e5b5c = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_c7e4e2dddc8438d5bd10cad26f5b6f16 = $(`<div id="html_c7e4e2dddc8438d5bd10cad26f5b6f16" style="width: 100.0%; height: 100.0%;"><a href="https://en.wikipedia.org/wiki/Poolside_AI" target="_blank">Poolside AI</a><br>San Francisco , United States [ 1 ]<br><b>Founded: 2023</b></div>`)[0];
+                popup_92c044c73409b79bc167bdaa164e5b5c.setContent(html_c7e4e2dddc8438d5bd10cad26f5b6f16);
+            
+        
+
+        circle_marker_9ea6bf0472a4ee44bbcbfa447001c8d1.bindPopup(popup_92c044c73409b79bc167bdaa164e5b5c)
+        ;
+
+        
+    
+    
+            circle_marker_9ea6bf0472a4ee44bbcbfa447001c8d1.bindTooltip(
+                `<div>
+                     Poolside AI — Founded 2023
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_81fe2d9211b1ea479410b95f9ee86237 = L.circleMarker(
+                [49.4093582, 8.694724],
+                {"bubblingMouseEvents": true, "color": "yellow", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "yellow", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_44247aeda3b5c3b0da6774514a2ab918);
+        
+    
+        var popup_2465d9176487d7c11430420b765d68c7 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_e3843ea5fbabe478d9f2e472fdbfdc81 = $(`<div id="html_e3843ea5fbabe478d9f2e472fdbfdc81" style="width: 100.0%; height: 100.0%;"><a href="https://en.wikipedia.org/wiki/Aleph_Alpha" target="_blank">Aleph Alpha</a><br>Heidelberg , Germany<br><b>Founded: 2019</b></div>`)[0];
+                popup_2465d9176487d7c11430420b765d68c7.setContent(html_e3843ea5fbabe478d9f2e472fdbfdc81);
+            
+        
+
+        circle_marker_81fe2d9211b1ea479410b95f9ee86237.bindPopup(popup_2465d9176487d7c11430420b765d68c7)
+        ;
+
+        
+    
+    
+            circle_marker_81fe2d9211b1ea479410b95f9ee86237.bindTooltip(
+                `<div>
+                     Aleph Alpha — Founded 2019
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_0510875282325af789ef4773f35b160d = L.circleMarker(
+                [50.938361, 6.959974],
+                {"bubblingMouseEvents": true, "color": "gray", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "gray", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_44247aeda3b5c3b0da6774514a2ab918);
+        
+    
+        var popup_41c6a21e38e520e49afd5d6317b8a649 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_d40746c080bc0a7a2c912aaf93d16d58 = $(`<div id="html_d40746c080bc0a7a2c912aaf93d16d58" style="width: 100.0%; height: 100.0%;"><a href="https://en.wikipedia.org/wiki/DeepL" target="_blank">DeepL</a><br>Cologne , North Rhine-Westphalia , Germany<br><b>Founded: Unknown</b></div>`)[0];
+                popup_41c6a21e38e520e49afd5d6317b8a649.setContent(html_d40746c080bc0a7a2c912aaf93d16d58);
+            
+        
+
+        circle_marker_0510875282325af789ef4773f35b160d.bindPopup(popup_41c6a21e38e520e49afd5d6317b8a649)
+        ;
+
+        
+    
+    
+            circle_marker_0510875282325af789ef4773f35b160d.bindTooltip(
+                `<div>
+                     DeepL — Founded Unknown
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_3cc4e001696baeaa7756f86b7bd1c98e = L.circleMarker(
+                [47.0303086, -68.1690418],
+                {"bubblingMouseEvents": true, "color": "green", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "green", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_44247aeda3b5c3b0da6774514a2ab918);
+        
+    
+        var popup_b17f05f4bd4efd3769626706af85c738 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_4d8f8b868f1733351b34d5f21b8bd455 = $(`<div id="html_4d8f8b868f1733351b34d5f21b8bd455" style="width: 100.0%; height: 100.0%;"><a href="https://en.wikipedia.org/wiki/Lovable_(company)" target="_blank">Lovable</a><br>Stockholm , Sweden [ 1 ]<br><b>Founded: 2023</b></div>`)[0];
+                popup_b17f05f4bd4efd3769626706af85c738.setContent(html_4d8f8b868f1733351b34d5f21b8bd455);
+            
+        
+
+        circle_marker_3cc4e001696baeaa7756f86b7bd1c98e.bindPopup(popup_b17f05f4bd4efd3769626706af85c738)
+        ;
+
+        
+    
+    
+            circle_marker_3cc4e001696baeaa7756f86b7bd1c98e.bindTooltip(
+                `<div>
+                     Lovable — Founded 2023
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_e121188a4a7cdd3591a2a9a6362413d0 = L.circleMarker(
+                [50.4500336, 30.5241361],
+                {"bubblingMouseEvents": true, "color": "yellow", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "yellow", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_44247aeda3b5c3b0da6774514a2ab918);
+        
+    
+        var popup_2f02bd4e5f230ccb1313fea1c7905efc = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_7a30a43cf41fc04eced900542fe89ddc = $(`<div id="html_7a30a43cf41fc04eced900542fe89ddc" style="width: 100.0%; height: 100.0%;"><a href="https://en.wikipedia.org/wiki/Respeecher" target="_blank">Respeecher</a><br>Kyiv , Ukraine<br><b>Founded: 2018</b></div>`)[0];
+                popup_2f02bd4e5f230ccb1313fea1c7905efc.setContent(html_7a30a43cf41fc04eced900542fe89ddc);
+            
+        
+
+        circle_marker_e121188a4a7cdd3591a2a9a6362413d0.bindPopup(popup_2f02bd4e5f230ccb1313fea1c7905efc)
+        ;
+
+        
+    
+    
+            circle_marker_e121188a4a7cdd3591a2a9a6362413d0.bindTooltip(
+                `<div>
+                     Respeecher — Founded 2018
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_7f626f42ea053a4ce47a2f616b4478ad = L.circleMarker(
+                [51.4010832, -0.276289],
+                {"bubblingMouseEvents": true, "color": "yellow", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "yellow", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_44247aeda3b5c3b0da6774514a2ab918);
+        
+    
+        var popup_a52152bf6e8a282c8e0148f4510eac53 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_4058a30d58d8e0f8d17fdd6f116f5db0 = $(`<div id="html_4058a30d58d8e0f8d17fdd6f116f5db0" style="width: 100.0%; height: 100.0%;"><a href="https://en.wikipedia.org/wiki/Google_DeepMind" target="_blank">DeepMind</a><br>London , England [ 3 ]<br><b>Founded: 2010</b></div>`)[0];
+                popup_a52152bf6e8a282c8e0148f4510eac53.setContent(html_4058a30d58d8e0f8d17fdd6f116f5db0);
+            
+        
+
+        circle_marker_7f626f42ea053a4ce47a2f616b4478ad.bindPopup(popup_a52152bf6e8a282c8e0148f4510eac53)
+        ;
+
+        
+    
+    
+            circle_marker_7f626f42ea053a4ce47a2f616b4478ad.bindTooltip(
+                `<div>
+                     DeepMind — Founded 2010
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_193750f6db0d5ad4d4a2515513976b6a = L.circleMarker(
+                [51.5074456, -0.1277653],
+                {"bubblingMouseEvents": true, "color": "green", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "green", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_44247aeda3b5c3b0da6774514a2ab918);
+        
+    
+        var popup_14195dae98b7916f0814939e0468fb73 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_3f3e1972a477f45da9e3c90839d88ccb = $(`<div id="html_3f3e1972a477f45da9e3c90839d88ccb" style="width: 100.0%; height: 100.0%;"><a href="https://en.wikipedia.org/wiki/Gradient_Labs" target="_blank">Gradient Labs</a><br>London<br><b>Founded: 2023</b></div>`)[0];
+                popup_14195dae98b7916f0814939e0468fb73.setContent(html_3f3e1972a477f45da9e3c90839d88ccb);
+            
+        
+
+        circle_marker_193750f6db0d5ad4d4a2515513976b6a.bindPopup(popup_14195dae98b7916f0814939e0468fb73)
+        ;
+
+        
+    
+    
+            circle_marker_193750f6db0d5ad4d4a2515513976b6a.bindTooltip(
+                `<div>
+                     Gradient Labs — Founded 2023
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_256d79b205f9f75e6d7f3cdd7287372a = L.circleMarker(
+                [51.5074456, -0.1277653],
+                {"bubblingMouseEvents": true, "color": "green", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "green", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_44247aeda3b5c3b0da6774514a2ab918);
+        
+    
+        var popup_411f48b839595597977c61b5926db811 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_2a4cd73da227cd7b885ac4e86a2c21c0 = $(`<div id="html_2a4cd73da227cd7b885ac4e86a2c21c0" style="width: 100.0%; height: 100.0%;"><a href="https://en.wikipedia.org/wiki/Isomorphic_Labs" target="_blank">Isomorphic Labs</a><br>London , United Kingdom<br><b>Founded: 2021</b></div>`)[0];
+                popup_411f48b839595597977c61b5926db811.setContent(html_2a4cd73da227cd7b885ac4e86a2c21c0);
+            
+        
+
+        circle_marker_256d79b205f9f75e6d7f3cdd7287372a.bindPopup(popup_411f48b839595597977c61b5926db811)
+        ;
+
+        
+    
+    
+            circle_marker_256d79b205f9f75e6d7f3cdd7287372a.bindTooltip(
+                `<div>
+                     Isomorphic Labs — Founded 2021
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_5817b26b006b9e413e3c64bbca4ef63a = L.circleMarker(
+                [51.7520131, -1.2578499],
+                {"bubblingMouseEvents": true, "color": "yellow", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "yellow", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_44247aeda3b5c3b0da6774514a2ab918);
+        
+    
+        var popup_34445562c942da0d16b049d8bc9fe4f7 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_790677d20ed2f3ec9845daa981733c4b = $(`<div id="html_790677d20ed2f3ec9845daa981733c4b" style="width: 100.0%; height: 100.0%;"><a href="https://en.wikipedia.org/wiki/Mind_Foundry" target="_blank">Mind Foundry</a><br>Oxford , Oxfordshire , United Kingdom<br><b>Founded: 2016</b></div>`)[0];
+                popup_34445562c942da0d16b049d8bc9fe4f7.setContent(html_790677d20ed2f3ec9845daa981733c4b);
+            
+        
+
+        circle_marker_5817b26b006b9e413e3c64bbca4ef63a.bindPopup(popup_34445562c942da0d16b049d8bc9fe4f7)
+        ;
+
+        
+    
+    
+            circle_marker_5817b26b006b9e413e3c64bbca4ef63a.bindTooltip(
+                `<div>
+                     Mind Foundry — Founded 2016
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_df13ef47fd427c191b2c82609b48864e = L.circleMarker(
+                [53.4794892, -2.2451148],
+                {"bubblingMouseEvents": true, "color": "yellow", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "yellow", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_44247aeda3b5c3b0da6774514a2ab918);
+        
+    
+        var popup_3e3eaf6eaf70b0c67bd12e5778ccb642 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_9e6d3521c8fb430050636e5f561d0fca = $(`<div id="html_9e6d3521c8fb430050636e5f561d0fca" style="width: 100.0%; height: 100.0%;"><a href="https://en.wikipedia.org/wiki/Peak_(company)" target="_blank">Peak</a><br>Manchester , England<br><b>Founded: 2015</b></div>`)[0];
+                popup_3e3eaf6eaf70b0c67bd12e5778ccb642.setContent(html_9e6d3521c8fb430050636e5f561d0fca);
+            
+        
+
+        circle_marker_df13ef47fd427c191b2c82609b48864e.bindPopup(popup_3e3eaf6eaf70b0c67bd12e5778ccb642)
+        ;
+
+        
+    
+    
+            circle_marker_df13ef47fd427c191b2c82609b48864e.bindTooltip(
+                `<div>
+                     Peak — Founded 2015
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_e515239ea19c8ca8656287df8d54c078 = L.circleMarker(
+                [51.5074456, -0.1277653],
+                {"bubblingMouseEvents": true, "color": "yellow", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "yellow", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_44247aeda3b5c3b0da6774514a2ab918);
+        
+    
+        var popup_1cb5453bc0c1366e34fbec8236c4e259 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_c31f4c4eec1f612805702f50d96f5de9 = $(`<div id="html_c31f4c4eec1f612805702f50d96f5de9" style="width: 100.0%; height: 100.0%;"><a href="https://en.wikipedia.org/wiki/Stability_AI" target="_blank">Stability AI</a><br>London , England , UK<br><b>Founded: 2019</b></div>`)[0];
+                popup_1cb5453bc0c1366e34fbec8236c4e259.setContent(html_c31f4c4eec1f612805702f50d96f5de9);
+            
+        
+
+        circle_marker_e515239ea19c8ca8656287df8d54c078.bindPopup(popup_1cb5453bc0c1366e34fbec8236c4e259)
+        ;
+
+        
+    
+    
+            circle_marker_e515239ea19c8ca8656287df8d54c078.bindTooltip(
+                `<div>
+                     Stability AI — Founded 2019
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_7974c485fadc33fe8d6f1f777d1c4e82 = L.circleMarker(
+                [51.5074456, -0.1277653],
+                {"bubblingMouseEvents": true, "color": "yellow", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "yellow", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_44247aeda3b5c3b0da6774514a2ab918);
+        
+    
+        var popup_4df30faf076fb0f38370197388e9614d = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_73c27f293d6e44297e54abed1f78d8b8 = $(`<div id="html_73c27f293d6e44297e54abed1f78d8b8" style="width: 100.0%; height: 100.0%;"><a href="https://en.wikipedia.org/wiki/Synthesia_(company)" target="_blank">Synthesia</a><br>London , United Kingdom<br><b>Founded: 2017</b></div>`)[0];
+                popup_4df30faf076fb0f38370197388e9614d.setContent(html_73c27f293d6e44297e54abed1f78d8b8);
+            
+        
+
+        circle_marker_7974c485fadc33fe8d6f1f777d1c4e82.bindPopup(popup_4df30faf076fb0f38370197388e9614d)
+        ;
+
+        
+    
+    
+            circle_marker_7974c485fadc33fe8d6f1f777d1c4e82.bindTooltip(
+                `<div>
+                     Synthesia — Founded 2017
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            L.control.fullscreen(
+                {
+  "position": "topleft",
+  "title": "Full Screen",
+  "titleCancel": "Exit Full Screen",
+  "forceSeparateButton": false,
+}
+            ).addTo(map_44247aeda3b5c3b0da6774514a2ab918);
+        
+</script>
+</html>
