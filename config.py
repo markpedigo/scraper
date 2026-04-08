@@ -1,3 +1,16 @@
+"""
+Configuration constants for the AI companies scraping project.
+
+This module centralizes URLs, file paths, and HTTP headers used
+throughout the pipeline. Keeping these values in one place makes it
+easy to adjust inputs, outputs, or request behavior without modifying
+multiple modules.
+
+Contents:
+- Wikipedia base URL and list page
+- Output and cache file paths
+- HTTP headers for polite scraping
+"""
 import os
 
 BASE = "https://en.wikipedia.org"

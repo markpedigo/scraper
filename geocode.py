@@ -1,3 +1,13 @@
+"""
+Geocoding utilities for converting headquarters into coordinates.
+
+This module enriches scraped company data by:
+- Converting headquarters text into latitude/longitude
+- Extracting country information
+- Caching geocoding results to avoid repeated API calls
+
+This is the "data enrichment" stage of the pipeline.
+"""
 import os
 import time
 import pandas as pd
@@ -5,7 +15,7 @@ from geopy.geocoders import Nominatim
 from geopy.exc import GeocoderServiceError, GeocoderTimedOut, GeocoderUnavailable
 
 from config import GEOCODE_CACHE_FILE, USER_AGENT
-from utils import validate_columns, validate_not_empty, normalize_headquarters
+from utils import validate_columns, validate_not_empty #, normalize_headquarters
 
 def load_geocode_cache() -> dict[str, tuple[float | None, float | None, str]]:
     """Load geocoding results from disk into a dict keyed by headquarters string."""
@@ -54,10 +64,6 @@ def geocode(companies_df: pd.DataFrame) -> pd.DataFrame:
 
     geolocator = Nominatim(user_agent=USER_AGENT)
     geocode_cache = load_geocode_cache()
-    geolocator = Nominatim(user_agent=USER_AGENT)
-
-    # Load cache from disk (so repeated runs are faster)
-    geocode_cache = load_geocode_cache()
 
     lats = []
     lons = []
@@ -70,8 +76,8 @@ def geocode(companies_df: pd.DataFrame) -> pd.DataFrame:
             countries.append("Unknown")
             continue
 
-        # Normalize string to improve cache hits
-        hq = str(hq).strip()
+        # # Normalize string to improve cache hits
+        # hq = normalize_headquarters(clean_headquarters_text(str(hq)))
 
         # Check cache first (avoid repeated API calls)
         if hq in geocode_cache:

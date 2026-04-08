@@ -1,3 +1,15 @@
+"""
+Shared utility functions used across the project.
+
+Includes:
+- HTTP helper for fetching and parsing HTML
+- DataFrame validation helpers
+- String normalization for consistent geocoding keys
+
+These functions support multiple stages of the pipeline but are not
+specific to scraping, geocoding, or mapping.
+"""
+import re
 import requests
 import pandas as pd
 from bs4 import BeautifulSoup
@@ -28,6 +40,9 @@ def validate_not_empty(df: pd.DataFrame, stage: str) -> None:
         raise ValueError(f"DataFrame is empty at {stage}.")
 
 
-def normalize_headquarters(hq: str) -> str:
-    """Normalize headquarters text for cache lookup."""
-    return " ".join(hq.split()).strip()
+def clean_headquarters_text(hq: str) -> str:
+    """Remove citation markers and normalize punctuation spacing."""
+    hq = re.sub(r"\[\s*\d+\s*\]", "", hq)   # remove [1], [ 2 ], etc.
+    hq = re.sub(r"\s+,", ",", hq)           # remove space before commas
+    hq = re.sub(r"\s+", " ", hq)            # collapse repeated whitespace
+    return hq.strip(" ,")

@@ -1,3 +1,14 @@
+"""
+Scraping logic for collecting AI company data from Wikipedia.
+
+This module handles:
+1. Extracting company links from the list page
+2. Visiting each company page
+3. Parsing infobox data (headquarters, founding year, website)
+4. Returning structured data as a DataFrame
+
+This is the "data collection" stage of the pipeline.
+"""
 import re
 import time
 import pandas as pd
@@ -5,7 +16,7 @@ import requests
 from bs4 import BeautifulSoup
 
 from config import BASE, LIST_URL, CACHE_FILE
-from utils import fetch_soup, validate_columns, validate_not_empty
+from utils import fetch_soup, validate_columns, validate_not_empty, clean_headquarters_text
 
 def get_company_links() -> list[dict[str, str]]:
     """
@@ -67,8 +78,9 @@ def parse_company_infobox(soup: BeautifulSoup) -> dict[str, str | None]:
             continue
 
         if "headquarters" in header_text:
-            hq = cell.get_text(separator=" ", strip=True)
-
+            for sup in cell.find_all("sup", class_="reference"):
+                sup.decompose()
+            hq = clean_headquarters_text(cell.get_text(separator=" ", strip=True))
         elif "founded" in header_text or "founding" in header_text:
             founded_text = cell.get_text(separator=" ", strip=True)
             match = re.search(r"\b(19|20)\d{2}\b", founded_text)

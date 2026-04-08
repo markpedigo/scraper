@@ -1,3 +1,14 @@
+"""
+Mapping utilities for visualizing AI companies on an interactive map.
+
+This module:
+- Assigns marker colors based on founding year
+- Builds popup content for each company
+- Creates a Folium map with markers and legend
+- Saves the final map as an HTML file
+
+This is the "visualization" stage of the pipeline.
+"""
 import os
 import pandas as pd
 import folium
@@ -40,7 +51,7 @@ def build_popup_html(row: pd.Series) -> str:
     if website and str(website).strip() and str(website).strip() != "nan":
         popup_html += (
             f'<a href="{website}" target="_blank" style="color: #0066cc;">'
-            f'Company Website</a> * '
+            f'Company Website</a> • '
         )
 
     popup_html += (

@@ -1,3 +1,13 @@
+"""
+Command-line entry point for the AI companies pipeline.
+
+This script orchestrates the full workflow:
+1. Scrape company data (or load from cache)
+2. Geocode headquarters (optional)
+3. Generate an interactive map
+
+Command-line flags allow skipping stages for faster iteration.
+"""
 import os
 import argparse
 import pandas as pd
@@ -10,6 +20,22 @@ from utils import validate_columns, validate_not_empty
 
 
 def main() -> None:
+    """
+    Run the AI companies data pipeline.
+
+    This function orchestrates the full workflow:
+
+    1. Scrape company data from Wikipedia (or load from cache)
+    2. Geocode headquarters locations (optional)
+    3. Generate an interactive map of company locations
+
+    Command-line flags:
+    --skip-scrape   Load cached data instead of scraping Wikipedia
+    --skip-geocode  Skip geocoding and use existing coordinates
+
+    The pipeline is designed for iterative development, allowing
+    individual stages to be skipped when data is already available.
+    """
     os.makedirs(OUTPUT_DIR, exist_ok=True)
 
     parser = argparse.ArgumentParser(
@@ -34,6 +60,8 @@ def main() -> None:
         validate_columns(df, ["name", "url"], "cache load")
     else:
         df = scrape_companies()
+
+    print(df[["name", "headquarters"]].head(10))
 
     if not args.skip_geocode:
         df = geocode(df)

@@ -1,21 +1,14 @@
 {
   "words": [
+    "Carto",
+    "Geocoder",
     "geocoders",
-    "Nominatim",
-    "Mathy",
-    "infobox",
     "geolocator",
-    "folium",
-    "geopy",
-    "lxml",
-    "positron",
+    "hrefs",
+    "infobox",
+    "KHTML",
     "lons",
-    "carto",
-    "beautifulsoup",
-    "pylint",
-    "Geocodes",
-    "geocoder",
-    "basemap",
-    "kmeans"
+    "navbox",
+    "Nominatim",
   ]
 }
