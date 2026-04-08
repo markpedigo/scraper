@@ -1,48 +1,42 @@
 headquarters,lat,lon,country
-"Toronto, Canada",43.6534817,-79.3839347,Canada
-"Toronto, Ontario, Canada",43.6534817,-79.3839347,Canada
-"Montreal, Quebec, Canada",45.5031824,-73.5698065,Canada
-"500 Howard Street, San Francisco, California, U.S.",37.7885108,-122.3967378,United States
-"New York, US",40.7127281,-74.0060152,United States
-"Burlington, Massachusetts, U.S.",42.5048167,-71.1956111,United States
-"San Francisco, California, United States",37.7879363,-122.4075201,United States
-"815-A Brazos Street, Suite 318, Austin, United States",,,Unknown
-"Emeryville, California",37.8314089,-122.2865266,United States
-"Palo Alto, California",37.4443293,-122.1598465,United States
-"Los Angeles, California, U.S.",34.0536909,-118.242766,United States
-"Manhattan, New York City",40.7579554,-73.9855319,United States
-"Palo Alto, California, U.S.",37.4443293,-122.1598465,United States
-"181 Fremont, San Francisco, California, United States",37.7898002,-122.3953496,United States
-"Astor Place, New York City, New York, U.S.",40.7298497,-73.9913897,United States
-"Redmond, Washington, United States",47.6694141,-122.1238767,United States
-"1455 3rd Street, San Francisco, California, U.S.",37.7700459,-122.3887896,United States
-"San Francisco, California, U.S.",37.7879363,-122.4075201,United States
-"Delafield, WI, United States",43.0594237,-88.4040172,United States
-"Manhattan, New York City, U.S.",40.7579554,-73.9855319,United States
-"Palo Alto, California Tel Aviv, Israel",,,Unknown
-"Stanford Research Park, Palo Alto, California, United States",,,Unknown
-"Beijing, China",39.9057136,116.3912972,中国
-"Hangzhou, Zhejiang, China",30.2489634,120.2052342,中国
-"Shanghai, China",31.2312707,121.4700152,中国
-"Science Park, Hong Kong",22.4241563,114.2114985,中国
-"Sheung Wan, Hong Kong",22.2865158,114.150208,中国
-"Mumbai, India",19.054999,72.8692035,India
-"Bengaluru, Karnataka, India",12.9767936,77.590082,India
-"Bangalore, India",12.9767936,77.590082,India
-"Tel Aviv, Israel",32.0852997,34.7818064,ישראל
-"Tokyo, Japan",35.6768601,139.7638947,日本
-"Riyadh, Saudi Arabia",23.333333,45.333333,السعودية
-"Yongin, South Korea",37.2405741,127.1785572,대한민국
-"New York City, United States",40.7127281,-74.0060152,United States
-"Paris, France",48.8534951,2.3483915,France
-"San Francisco, United States",37.7879363,-122.4075201,United States
-"Heidelberg, Germany",49.4093582,8.694724,Deutschland
-"Cologne, North Rhine-Westphalia, Germany",50.938361,6.959974,Deutschland
-"Stockholm, Sweden",59.3251172,18.0710935,Sverige
-"Kyiv, Ukraine",50.4500336,30.5241361,Україна
-"London, England",51.5074456,-0.1277653,United Kingdom
-London,51.5074456,-0.1277653,United Kingdom
-"London, United Kingdom",51.5074456,-0.1277653,United Kingdom
-"Oxford, Oxfordshire, United Kingdom",51.7520131,-1.2578499,United Kingdom
-"Manchester, England",53.4794892,-2.2451148,United Kingdom
-"London, England, UK",51.5074456,-0.1277653,United Kingdom
+"toronto, canada",43.6534817,-79.3839347,Canada
+"ontario, canada",50.000678,-86.000977,Canada
+"quebec, canada",52.4760892,-71.8258668,Canada
+"california, u.s.",36.7014631,-118.755997,United States
+"new york, us",40.7127281,-74.0060152,United States
+"massachusetts, u.s.",42.3788774,-72.032366,United States
+"california, united states",36.7014631,-118.755997,United States
+"austin, united states",30.2711286,-97.7436995,United States
+"emeryville, california",37.8314089,-122.2865266,United States
+"palo alto, california",37.4443293,-122.1598465,United States
+"manhattan, new york city",40.7579554,-73.9855319,United States
+"new york, u.s.",40.7127281,-74.0060152,United States
+"washington, united states",38.8950982,-77.0363849,United States
+"wi, united states",44.4308975,-89.6884637,United States
+"new york city, u.s.",40.7127281,-74.0060152,United States
+"california tel aviv, israel",32.0603792,34.771747,ישראל
+"beijing, china",39.9057136,116.3912972,中国
+"zhejiang, china",29.0000001,119.9999999,中国
+"shanghai, china",31.2312707,121.4700152,中国
+"science park, hong kong",22.4241563,114.2114985,中国
+"sheung wan, hong kong",22.2865158,114.150208,中国
+"mumbai, india",19.054999,72.8692035,India
+"karnataka, india",14.9562045,75.7896741,India
+"bangalore, india",12.9767936,77.590082,India
+"tel aviv, israel",32.0852997,34.7818064,ישראל
+"tokyo, japan",35.6768601,139.7638947,日本
+"riyadh, saudi arabia",23.333333,45.333333,السعودية
+"yongin, south korea",37.2405741,127.1785572,대한민국
+"new york city, united states",40.7127281,-74.0060152,United States
+"paris, france",48.8588897,2.320041,France
+"san francisco, united states",37.7879363,-122.4075201,United States
+"heidelberg, germany",49.4093582,8.694724,Deutschland
+"north rhine-westphalia, germany",51.4789205,7.5543751,Deutschland
+"stockholm, sweden",59.3251172,18.0710935,Sverige
+"kyiv, ukraine",50.4500336,30.5241361,Україна
+"london, england",51.5074456,-0.1277653,United Kingdom
+london,51.5074456,-0.1277653,United Kingdom
+"london, united kingdom",51.5074456,-0.1277653,United Kingdom
+"oxfordshire, united kingdom",51.833333,-1.25,United Kingdom
+"manchester, england",53.4794892,-2.2451148,United Kingdom
+"england, uk",52.5310214,-1.2649062,United Kingdom

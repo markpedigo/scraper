@@ -36,6 +36,8 @@ def main() -> None:
     The pipeline is designed for iterative development, allowing
     individual stages to be skipped when data is already available.
     """
+    print("Pipeline: scrape → geocode → map")
+
     os.makedirs(OUTPUT_DIR, exist_ok=True)
 
     parser = argparse.ArgumentParser(
@@ -60,8 +62,6 @@ def main() -> None:
         validate_columns(df, ["name", "url"], "cache load")
     else:
         df = scrape_companies()
-
-    print(df[["name", "headquarters"]].head(10))
 
     if not args.skip_geocode:
         df = geocode(df)

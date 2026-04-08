@@ -40,6 +40,17 @@ def validate_not_empty(df: pd.DataFrame, stage: str) -> None:
         raise ValueError(f"DataFrame is empty at {stage}.")
 
 
+def simplify_headquarters(hq: str) -> str:
+    parts = [p.strip() for p in hq.split(",")]
+    if len(parts) >= 2:
+        return f"{parts[-2]}, {parts[-1]}"
+    return hq
+
+def normalize_headquarters(hq: str) -> str:
+    """Normalize headquarters text for cache lookup."""
+    return " ".join(hq.lower().split())
+
+
 def clean_headquarters_text(hq: str) -> str:
     """Remove citation markers and normalize punctuation spacing."""
     hq = re.sub(r"\[\s*\d+\s*\]", "", hq)   # remove [1], [ 2 ], etc.

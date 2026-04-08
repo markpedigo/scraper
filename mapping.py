@@ -48,7 +48,7 @@ def build_popup_html(row: pd.Series) -> str:
     )
 
     website = row.get("website")
-    if website and str(website).strip() and str(website).strip() != "nan":
+    if pd.notna(website) and str(website).strip():
         popup_html += (
             f'<a href="{website}" target="_blank" style="color: #0066cc;">'
             f'Company Website</a> • '
@@ -113,6 +113,9 @@ def make_map(companies_df: pd.DataFrame) -> None:
         "make_map input",
     )
 
+    # Sort by founded year so newer companies are on top
+    companies_df = companies_df.sort_values(by="founded", na_position="last")    
+
     m = folium.Map(
         location=[30, -30],
         zoom_start=2.5,
@@ -125,6 +128,8 @@ def make_map(companies_df: pd.DataFrame) -> None:
     plotted = 0
 
     # Only plot companies with valid coordinates
+    missing = companies_df["lat"].isna().sum()
+    print(f"Geocoding complete: {len(companies_df) - missing} success, {missing} failed")
     for _, row in companies_df.dropna(subset=["lat", "lon"]).iterrows():
         color = get_marker_color(row["founded"])
         popup_html = build_popup_html(row)

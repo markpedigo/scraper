@@ -15,7 +15,7 @@ from geopy.geocoders import Nominatim
 from geopy.exc import GeocoderServiceError, GeocoderTimedOut, GeocoderUnavailable
 
 from config import GEOCODE_CACHE_FILE, USER_AGENT
-from utils import validate_columns, validate_not_empty #, normalize_headquarters
+from utils import validate_columns, validate_not_empty, simplify_headquarters, normalize_headquarters
 
 def load_geocode_cache() -> dict[str, tuple[float | None, float | None, str]]:
     """Load geocoding results from disk into a dict keyed by headquarters string."""
@@ -54,10 +54,12 @@ def geocode(companies_df: pd.DataFrame) -> pd.DataFrame:
     """
     Convert headquarters strings into geographic coordinates.
 
-    This demonstrates:
-    - enriching scraped data with an external service
-    - caching expensive operations
-    - handling unreliable external APIs
+    This function:
+    - validates the input DataFrame
+    - cleans and simplifies headquarters strings
+    - reuses cached geocoding results when available
+    - calls Nominatim only when needed
+    - appends lat, lon, and country columns
     """
     validate_not_empty(companies_df, "geocode input")
     validate_columns(companies_df, ["name", "url", "headquarters"], "geocode input")
@@ -65,9 +67,9 @@ def geocode(companies_df: pd.DataFrame) -> pd.DataFrame:
     geolocator = Nominatim(user_agent=USER_AGENT)
     geocode_cache = load_geocode_cache()
 
-    lats = []
-    lons = []
-    countries = []
+    lats: list[float | None] = []
+    lons: list[float | None] = []
+    countries: list[str] = []
 
     for hq in companies_df["headquarters"]:
         if pd.isna(hq):
@@ -76,52 +78,47 @@ def geocode(companies_df: pd.DataFrame) -> pd.DataFrame:
             countries.append("Unknown")
             continue
 
-        # # Normalize string to improve cache hits
-        # hq = normalize_headquarters(clean_headquarters_text(str(hq)))
+        # Clean the raw headquarters text for geocoding.
+        hq_clean = simplify_headquarters(str(hq))
 
-        # Check cache first (avoid repeated API calls)
-        if hq in geocode_cache:
-            lat, lon, country = geocode_cache[hq]
+        # Normalize the cleaned string so equivalent values reuse the same cache entry.
+        key = normalize_headquarters(hq_clean)
+
+        # Reuse cached result if we already geocoded this location.
+        if key in geocode_cache:
+            lat, lon, country = geocode_cache[key]
             lats.append(lat)
             lons.append(lon)
             countries.append(country)
             continue
 
         try:
-            # Call external geocoding service
-            loc = geolocator.geocode(hq, timeout=10)
-
+            loc = geolocator.geocode(hq_clean, timeout=10)
         except (GeocoderTimedOut, GeocoderUnavailable, GeocoderServiceError) as e:
-            # External service failures are expected sometimes
-            print(f"Geocoding failed for '{hq}': {e}")
+            print(f"Geocoding failed for '{hq_clean}': {e}")
             lat, lon, country = None, None, "Unknown"
-
         else:
             if loc:
                 lat = loc.latitude
                 lon = loc.longitude
-
-                # Extract country from full address string
-                parts = loc.address.split(",") if loc.address else []
-                country = parts[-1].strip() if parts else "Unknown"
+                address_parts = loc.address.split(",") if loc.address else []
+                country = address_parts[-1].strip() if address_parts else "Unknown"
             else:
                 lat, lon, country = None, None, "Unknown"
 
-        # Save result to cache
-        geocode_cache[hq] = (lat, lon, country)
+        # Save the result under the normalized cache key.
+        geocode_cache[key] = (lat, lon, country)
 
         lats.append(lat)
         lons.append(lon)
         countries.append(country)
 
-        # Respect Nominatim rate limits
+        # Sleep only when we make a real API call.
         time.sleep(1.1)
 
     companies_df["lat"] = lats
     companies_df["lon"] = lons
     companies_df["country"] = countries
 
-    # Persist cache for future runs
     save_geocode_cache(geocode_cache)
-
     return companies_df
