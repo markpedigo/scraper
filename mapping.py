@@ -183,7 +183,7 @@ def make_map(companies_df: pd.DataFrame) -> None:
     print(sorted(valid.loc[valid["region"] == "Other", "country"].dropna().unique()))
 
     m = folium.Map(
-        location=[30, -50],
+        location=[30, 0],
         zoom_start=3,
         tiles="CartoDB positron",
         min_zoom=2.5,
