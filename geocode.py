@@ -15,7 +15,8 @@ from geopy.geocoders import Nominatim
 from geopy.exc import GeocoderServiceError, GeocoderTimedOut, GeocoderUnavailable
 
 from config import GEOCODE_CACHE_FILE, USER_AGENT
-from utils import validate_columns, validate_not_empty, simplify_headquarters, normalize_headquarters
+from utils import validate_columns, validate_not_empty
+from utils import simplify_headquarters, normalize_headquarters
 
 def load_geocode_cache() -> dict[str, tuple[float | None, float | None, str]]:
     """Load geocoding results from disk into a dict keyed by headquarters string."""

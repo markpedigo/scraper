@@ -41,10 +41,14 @@ def validate_not_empty(df: pd.DataFrame, stage: str) -> None:
 
 
 def simplify_headquarters(hq: str) -> str:
-    parts = [p.strip() for p in hq.split(",")]
+    """Reduce a headquarters string to a simpler geocoding target."""
+    parts = [p.strip() for p in hq.split(",") if p.strip()]
+    if len(parts) >= 3:
+        return ", ".join(parts[-3:])
     if len(parts) >= 2:
-        return f"{parts[-2]}, {parts[-1]}"
-    return hq
+        return ", ".join(parts[-2:])
+    return hq.strip()
+
 
 def normalize_headquarters(hq: str) -> str:
     """Normalize headquarters text for cache lookup."""

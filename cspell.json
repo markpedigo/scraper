@@ -1,14 +1,26 @@
 {
   "words": [
+    "beautifulsoup4",
     "Carto",
     "Geocoder",
     "geocoders",
     "geolocator",
+    "geopy",
     "hrefs",
     "infobox",
     "KHTML",
     "lons",
+    "lxml",
+    "matplotlib",
     "navbox",
     "Nominatim",
+    "numpy",
+    "scikit",
+    "ישראל",
+    "لسعودية",
+    "中国",
+    "日本",
+    "대한민국",
+    "Україна"
   ]
 }

@@ -61,11 +61,15 @@ def parse_company_infobox(soup: BeautifulSoup) -> dict[str, str | None]:
     """
     infobox = soup.find("table", class_="infobox")
     if not infobox:
-        return {"headquarters": None, "founded": None, "website": None}
+        return {"headquarters": None,
+                "founded": None,
+                "website": None,
+                "employees": None}
 
     hq = None
     founded = None
     website = None
+    employees = None
 
     for row in infobox.find_all("tr"):
         header = row.find("th")
@@ -86,15 +90,24 @@ def parse_company_infobox(soup: BeautifulSoup) -> dict[str, str | None]:
             match = re.search(r"\b(19|20)\d{2}\b", founded_text)
             if match:
                 founded = match.group(0)
-
         elif "website" in header_text:
             link = cell.find("a", href=True)
             if link:
                 website = link["href"]
                 if not website.startswith("http"):
                     website = "https://" + website
+        elif "employees" in header_text:
+            employees_text = cell.get_text(separator=" ", strip=True)
 
-    return {"headquarters": hq, "founded": founded, "website": website}
+            # Grab the first large integer-like value: 1,500 or 1500
+            match = re.search(r"\b\d[\d,]*\b", employees_text)
+            if match:
+                employees = int(match.group(0).replace(",", ""))
+
+    return {"headquarters": hq,
+            "founded": founded,
+            "website": website,
+            "employees": employees}
 
 
 def get_company_info(url: str) -> dict[str, str | None]:
@@ -106,7 +119,10 @@ def get_company_info(url: str) -> dict[str, str | None]:
         soup = fetch_soup(url)
     except requests.RequestException as e:
         print(f"Request failed for {url}: {e}")
-        return {"headquarters": None, "founded": None, "website": None}
+        return {"headquarters": None,
+                "founded": None,
+                "website": None,
+                "employees": None}
 
     return parse_company_infobox(soup)
 
@@ -135,7 +151,7 @@ def scrape_companies() -> pd.DataFrame:
     validate_not_empty(company_df, "scrape_companies")
     validate_columns(
         company_df,
-        ["name", "headquarters", "founded", "website", "url"],
+        ["name", "headquarters", "founded", "website", "employees", "url"],
         "scrape_companies",
     )
 

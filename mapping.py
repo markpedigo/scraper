@@ -9,6 +9,7 @@ This module:
 
 This is the "visualization" stage of the pipeline.
 """
+import math
 import os
 import pandas as pd
 import folium
@@ -16,6 +17,16 @@ from folium.plugins import Fullscreen, MarkerCluster
 
 from config import OUTPUT_DIR
 from utils import validate_columns, validate_not_empty
+
+def marker_size(employees: float | int | None) -> float:
+    """Scale marker radius using employee count."""
+    if pd.isna(employees) or not employees:
+        return 5
+
+    # Log scaling keeps large companies from dominating the map
+    radius = 2 + math.log10(float(employees)) * 2
+    return max(4, min(14, radius))
+
 
 def get_marker_color(founded: str | float | None) -> str:
     """Map founding year to a color bucket."""
@@ -40,11 +51,17 @@ def build_popup_html(row: pd.Series) -> str:
     """Build HTML content for a company popup."""
     founded_display = row["founded"] if pd.notna(row["founded"]) else "Unknown"
 
+    employees = row.get("employees")
+    employees_display = (
+        f"{int(employees):,}" if pd.notna(employees) else "Unknown"
+    )
+
     popup_html = (
         f'<div style="font-family: Arial; font-size: 12px;">'
         f'<b>{row["name"]}</b><br>'
         f'{row["headquarters"]}<br>'
-        f'Founded: {founded_display}<br><br>'
+        f'Founded: {founded_display}<br>'
+        f'Employees: {employees_display}<br><br>'
     )
 
     website = row.get("website")
@@ -69,7 +86,7 @@ def add_legend(map_obj: folium.Map) -> None:
         position: fixed;
         bottom: 50px;
         left: 50px;
-        width: 210px;
+        width: 240px;
         background-color: white;
         border: 2px solid grey;
         border-radius: 8px;
@@ -79,79 +96,19 @@ def add_legend(map_obj: folium.Map) -> None:
         box-shadow: 2px 2px 6px rgba(0,0,0,0.15);
         line-height: 1.6;
     ">
-      <div style="font-weight: 700; margin-bottom: 8px;">Founded Year</div>
-      <div style="display: flex; align-items: center; margin-bottom: 4px;">
-        <span style="display: inline-block; width: 12px; height: 12px; margin-right: 8px; border-radius: 50%; background: red;"></span>
-        Before 2000
-      </div>
-      <div style="display: flex; align-items: center; margin-bottom: 4px;">
-        <span style="display: inline-block; width: 12px; height: 12px; margin-right: 8px; border-radius: 50%; background: orange;"></span>
-        2000-2009
-      </div>
-      <div style="display: flex; align-items: center; margin-bottom: 4px;">
-        <span style="display: inline-block; width: 12px; height: 12px; margin-right: 8px; border-radius: 50%; background: yellow; border: 1px solid #999;"></span>
-        2010-2019
-      </div>
-      <div style="display: flex; align-items: center; margin-bottom: 4px;">
-        <span style="display: inline-block; width: 12px; height: 12px; margin-right: 8px; border-radius: 50%; background: green;"></span>
-        2020+
-      </div>
-      <div style="display: flex; align-items: center;">
-        <span style="display: inline-block; width: 12px; height: 12px; margin-right: 8px; border-radius: 50%; background: gray;"></span>
-        Unknown
+      <div style="font-weight: 700; margin-bottom: 8px;">Region</div>
+      <div><span style="color: blue;">●</span> North America</div>
+      <div><span style="color: green;">●</span> Europe</div>
+      <div><span style="color: red;">●</span> Asia / Middle East</div>
+      <div><span style="color: gray;">●</span> Other</div>
+
+      <div style="border-top: 1px solid #ddd; padding-top: 6px; margin-top: 8px; font-size: 13px;">
+        Numbers = number of companies<br>
+        Larger circles = more employees
       </div>
     </div>
     """
     map_obj.get_root().html.add_child(folium.Element(legend_html))
-
-# def make_map(companies_df: pd.DataFrame) -> None:
-#     """Build an interactive world map and save it as an HTML file."""
-#     validate_not_empty(companies_df, "make_map input")
-#     validate_columns(
-#         companies_df,
-#         ["name", "url", "headquarters", "founded", "lat", "lon"],
-#         "make_map input",
-#     )
-
-#     # Sort by founded year so newer companies are on top
-#     companies_df = companies_df.sort_values(by="founded", na_position="last")    
-
-#     m = folium.Map(
-#         location=[30, -30],
-#         zoom_start=2.5,
-#         tiles="CartoDB positron",
-#         min_zoom=2.5,
-#         world_copy_jump=False,
-#         max_bounds=True,
-#     )
-
-#     plotted = 0
-
-#     # Only plot companies with valid coordinates
-#     missing = companies_df["lat"].isna().sum()
-#     print(f"Geocoding complete: {len(companies_df) - missing} success, {missing} failed")
-#     for _, row in companies_df.dropna(subset=["lat", "lon"]).iterrows():
-#         color = get_marker_color(row["founded"])
-#         popup_html = build_popup_html(row)
-
-#         folium.CircleMarker(
-#             location=[row["lat"], row["lon"]],
-#             radius=6,
-#             color=color,
-#             fill=True,
-#             fill_color=color,
-#             fill_opacity=0.8,
-#             popup=folium.Popup(popup_html, max_width=250),
-#         ).add_to(m)
-
-#         plotted += 1
-
-#     add_legend(m)
-#     Fullscreen().add_to(m)
-
-#     map_path = os.path.join(OUTPUT_DIR, "ai_companies_map.html")
-#     m.save(map_path)
-#     print(f"Map saved: {plotted} companies plotted → {map_path}")
 
 
 def region_from_country(country: str) -> str:
@@ -165,12 +122,14 @@ def region_from_country(country: str) -> str:
         return "North America"
     if country in {
         "United Kingdom", "France", "Germany", "Sweden", "Netherlands",
-        "Switzerland", "Ukraine", "Ireland", "Belgium", "Spain", "Italy"
+        "Switzerland", "Ukraine", "Ireland", "Belgium", "Spain", "Italy",
+        "Deutschland", "Sverige", "Україна"
     }:
         return "Europe"
     if country in {
-        "China", "Japan", "India", "South Korea", "Singapore",
-        "Israel", "Saudi Arabia", "United Arab Emirates"
+        "China", "Taiwan", "Japan", "India", "South Korea", "Singapore",
+        "Israel", "Saudi Arabia", "United Arab Emirates", "Hong Kong",
+        "ישראל", "لسعودية", "中国", "日本", "대한민국"
     }:
         return "Asia / Middle East"
 
@@ -188,6 +147,24 @@ def region_color(region: str) -> str:
     return colors.get(region, "gray")
 
 
+def make_cluster(color: str) -> MarkerCluster:
+    """Create a MarkerCluster with a custom colored cluster icon."""
+    js = f"""
+    function(cluster) {{
+        return L.divIcon({{
+            html: '<div style="background:{color};color:white;border-radius:50%;'
+                  + 'width:40px;height:40px;line-height:40px;text-align:center;'
+                  + 'font-weight:bold;border:2px solid white;">'
+                  + cluster.getChildCount() +
+                  '</div>',
+            className: 'marker-cluster-custom',
+            iconSize: [40, 40]
+        }});
+    }}
+    """
+    return MarkerCluster(icon_create_function=js)
+
+
 def make_map(companies_df: pd.DataFrame) -> None:
     """Build an interactive world map with clustered, region-colored markers."""
     validate_not_empty(companies_df, "make_map input")
@@ -202,14 +179,36 @@ def make_map(companies_df: pd.DataFrame) -> None:
 
     valid["region"] = valid["country"].apply(region_from_country)
 
+    print("\nCountries classified as Other:")
+    print(sorted(valid.loc[valid["region"] == "Other", "country"].dropna().unique()))
+
     m = folium.Map(
-        location=[30, -30],
-        zoom_start=2.5,
+        location=[30, -50],
+        zoom_start=3,
         tiles="CartoDB positron",
         min_zoom=2.5,
         world_copy_jump=False,
         max_bounds=True,
     )
+
+    title_html = """
+    <div style="
+        position: fixed;
+        top: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 9999;
+        font-size: 18px;
+        font-weight: 700;
+        background-color: white;
+        padding: 8px 14px;
+        border-radius: 6px;
+        box-shadow: 2px 2px 6px rgba(0,0,0,0.15);
+    ">
+        Global AI Companies by Region and Size
+    </div>
+    """
+    m.get_root().html.add_child(folium.Element(title_html))
 
     layers = {
         "North America": folium.FeatureGroup(name="North America").add_to(m),
@@ -219,48 +218,36 @@ def make_map(companies_df: pd.DataFrame) -> None:
     }
 
     clusters = {
-        region: MarkerCluster().add_to(layer)
-        for region, layer in layers.items()
+        "North America": make_cluster("blue").add_to(layers["North America"]),
+        "Europe": make_cluster("green").add_to(layers["Europe"]),
+        "Asia / Middle East": make_cluster("red").add_to(layers["Asia / Middle East"]),
+        "Other": make_cluster("gray").add_to(layers["Other"]),
     }
 
     for _, row in valid.iterrows():
         region = row["region"]
         color = region_color(region)
         popup_html = build_popup_html(row)
+        radius = marker_size(row.get("employees"))
 
-        folium.CircleMarker(
+        folium.Marker(
             location=[row["lat"], row["lon"]],
-            radius=6,
-            color=color,
-            fill=True,
-            fill_color=color,
-            fill_opacity=0.8,
             popup=folium.Popup(popup_html, max_width=250),
+            icon=folium.DivIcon(
+                html=f"""
+                <div style="
+                    width:{radius * 2}px;
+                    height:{radius * 2}px;
+                    background:{color};
+                    border:2px solid white;
+                    border-radius:50%;
+                    opacity:0.85;
+                "></div>
+                """
+            ),
         ).add_to(clusters[region])
 
-    legend_html = """
-    <div style="
-        position: fixed;
-        bottom: 50px;
-        left: 50px;
-        width: 210px;
-        background-color: white;
-        border: 2px solid grey;
-        border-radius: 8px;
-        z-index: 9999;
-        font-size: 14px;
-        padding: 10px;
-        box-shadow: 2px 2px 6px rgba(0,0,0,0.15);
-        line-height: 1.6;
-    ">
-      <div style="font-weight: 700; margin-bottom: 8px;">Region</div>
-      <div><span style="color: blue;">●</span> North America</div>
-      <div><span style="color: green;">●</span> Europe</div>
-      <div><span style="color: red;">●</span> Asia / Middle East</div>
-      <div><span style="color: gray;">●</span> Other</div>
-    </div>
-    """
-    m.get_root().html.add_child(folium.Element(legend_html))
+    add_legend(m)
 
     folium.LayerControl().add_to(m)
     Fullscreen().add_to(m)

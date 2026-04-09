@@ -69,6 +69,16 @@ def main() -> None:
 
     make_map(df)
 
+    # Summary table
+    print(df["country"].value_counts().head(10))
+
+    # Top N by employees
+    print(
+        df[["name", "employees", "country"]]
+        .dropna(subset=["employees"])
+        .sort_values("employees", ascending=False)
+        .head(10)
+    )
 
 if __name__ == "__main__":
     main()
