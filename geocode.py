@@ -1,12 +1,10 @@
 """
-Geocoding utilities for converting headquarters into coordinates.
+Geocode utilities for converting headquarters into coordinates.
 
-This module enriches scraped company data by:
-- Converting headquarters text into latitude/longitude
-- Extracting country information
-- Caching geocoding results to avoid repeated API calls
-
-This is the "data enrichment" stage of the pipeline.
+This module:
+- Converts headquarters text into latitude/longitude.
+- Extracts country information.
+- Caches geocoding results to avoid repeated API calls.
 """
 import os
 import time
@@ -19,7 +17,14 @@ from utils import validate_columns, validate_not_empty
 from utils import simplify_headquarters, normalize_headquarters
 
 def load_geocode_cache() -> dict[str, tuple[float | None, float | None, str]]:
-    """Load geocoding results from disk into a dict keyed by headquarters string."""
+    """
+    Load geocoding results from disk into a dict keyed by headquarters string.
+
+    Returns:
+        dict[str, tuple[float | None, float | None, str]]: A dictionary that maps
+            headquarters strings to tuples of (latitude, longitude, country).
+            Latitude and longitude are None if geocoding failed.
+    """
     if not os.path.exists(GEOCODE_CACHE_FILE):
         return {}
 
@@ -37,7 +42,17 @@ def load_geocode_cache() -> dict[str, tuple[float | None, float | None, str]]:
 
 
 def save_geocode_cache(cache: dict[str, tuple[float | None, float | None, str]]) -> None:
-    """Save geocoding cache to disk."""
+    """
+    Save geocoding cache to disk.
+
+    Args:
+        cache (dict[str, tuple[float | None, float | None, str]]): A dictionary
+            mapping headquarters strings to tuples of (latitude, longitude,
+            country).
+
+    Returns:
+        None
+    """
     rows = []
     for headquarters, (lat, lon, country) in cache.items():
         rows.append({
@@ -61,6 +76,17 @@ def geocode(companies_df: pd.DataFrame) -> pd.DataFrame:
     - reuses cached geocoding results when available
     - calls Nominatim only when needed
     - appends lat, lon, and country columns
+
+    Args:
+        companies_df (pd.DataFrame): A DataFrame with columns 'name', 'url',
+            and 'headquarters'. The 'headquarters' column contains location
+            strings to geocode.
+
+    Returns:
+        pd.DataFrame: The input DataFrame with three new columns added:
+            - 'lat' (float | None): Latitude of the headquarters location
+            - 'lon' (float | None): Longitude of the headquarters location
+            - 'country' (str): Country extracted from the geocoding result
     """
     validate_not_empty(companies_df, "geocode input")
     validate_columns(companies_df, ["name", "url", "headquarters"], "geocode input")

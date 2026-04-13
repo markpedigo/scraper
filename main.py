@@ -36,7 +36,7 @@ def main() -> None:
     The pipeline is designed for iterative development, allowing
     individual stages to be skipped when data is already available.
     """
-    print("Pipeline: scrape → geocode → map")
+    print("Pipeline: scrape → geocode → map\n")
 
     os.makedirs(OUTPUT_DIR, exist_ok=True)
 

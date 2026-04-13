@@ -15,12 +15,16 @@ import pandas as pd
 import requests
 from bs4 import BeautifulSoup
 
-from config import BASE, LIST_URL, CACHE_FILE
+from config import BASE_URL, LIST_URL, CACHE_FILE
 from utils import fetch_soup, validate_columns, validate_not_empty, clean_headquarters_text
 
 def get_company_links() -> list[dict[str, str]]:
     """
     Scrape the Wikipedia list page and return unique company links.
+
+    Returns:
+        list[dict[str, str]]: List of dictionaries with keys 'name' and 'url'
+            for each company found on the Wikipedia AI companies list.
     """
     soup = fetch_soup(LIST_URL)
 
@@ -48,7 +52,7 @@ def get_company_links() -> list[dict[str, str]]:
         seen_hrefs.add(href)
         companies.append({
             "name": name,
-            "url": BASE + href,
+            "url": BASE_URL + href,
         })
 
     return companies
@@ -58,6 +62,13 @@ def parse_company_infobox(soup: BeautifulSoup) -> dict[str, str | None]:
     """
     Parse a Wikipedia company page and extract headquarters, founding year,
     and website from the infobox.
+
+    Args:
+        soup (BeautifulSoup): Parsed HTML of a Wikipedia company page.
+
+    Returns:
+        dict[str, str | None]: Dictionary with keys 'headquarters', 'founded',
+            'website', and 'employees', with values as strings or None if not found.
     """
     infobox = soup.find("table", class_="infobox")
     if not infobox:
@@ -114,6 +125,13 @@ def get_company_info(url: str) -> dict[str, str | None]:
     """
     Fetch a company's Wikipedia page and extract headquarters,
     founding year, and website.
+
+    Args:
+        url (str): Wikipedia URL of the company page.
+
+    Returns:
+        dict[str, str | None]: Dictionary with keys 'headquarters', 'founded',
+            'website', and 'employees'. Returns all None values if the request fails.
     """
     try:
         soup = fetch_soup(url)
@@ -128,14 +146,16 @@ def get_company_info(url: str) -> dict[str, str | None]:
 
 
 def scrape_companies() -> pd.DataFrame:
-    """Scrape company names, headquarters, founding years, and websites from Wikipedia.
+    """
+    Scrape company names, headquarters, founding years, and websites from Wikipedia.
 
-    Fetches the first 100 companies from the Wikipedia AI companies list,
-    visits each article to extract headquarters, founding year, and website data, and caches the
-    results to CACHE_FILE as a CSV.
+    Fetches companies from the Wikipedia AI companies list, visits each article
+    to extract headquarters, founding year, website, and employee count data,
+    deduplicates by URL, and caches results to CACHE_FILE as CSV.
 
     Returns:
-        A DataFrame with columns: 'name', 'headquarters', 'founded', 'website', 'url'.
+        pd.DataFrame: DataFrame with columns 'name', 'headquarters', 'founded',
+            'website', 'employees', and 'url'.
     """
     companies = get_company_links()
     print(f"Found {len(companies)} companies")

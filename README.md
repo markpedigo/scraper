@@ -1,12 +1,11 @@
 # AI Companies Map
 
-Scrapes AI company data from Wikipedia, geocodes headquarters,
-and plots an interactive world map.
+Scrapes AI company data from Wikipedia, geocodes headquarters, and plots an interactive world map.
 
 ## Usage
 
-    uv run python main.py                          # full run
-    uv run python main.py --skip-scrape            # skip to geocode
+    uv run python main.py                               # full run
+    uv run python main.py --skip-scrape                 # skip to geocode
     uv run python main.py --skip-scrape --skip-geocode  # map only
 
 ## Output

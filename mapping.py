@@ -19,7 +19,17 @@ from config import OUTPUT_DIR
 from utils import validate_columns, validate_not_empty
 
 def marker_size(employees: float | int | None) -> float:
-    """Scale marker radius using employee count."""
+    """
+    Scale marker radius using employee count.
+
+    Uses logarithmic scaling to keep large companies from dominating the map.
+
+    Args:
+        employees (float | int | None): Number of employees, or None for unknown.
+
+    Returns:
+        float: Marker radius in pixels, between 4 and 14.
+    """
     if pd.isna(employees) or not employees:
         return 5
 
@@ -29,7 +39,16 @@ def marker_size(employees: float | int | None) -> float:
 
 
 def get_marker_color(founded: str | float | None) -> str:
-    """Map founding year to a color bucket."""
+    """
+    Map founding year to a color bucket.
+
+    Args:
+        founded (str | float | None): Founding year as a string, number, or None.
+
+    Returns:
+        str: Color name: "red" (pre-2000), "orange" (2000-2009), "yellow" (2010-2019), 
+                         "green" (2020+), or "gray" (unknown).
+    """
     if pd.isna(founded):
         return "gray"
 
@@ -48,7 +67,15 @@ def get_marker_color(founded: str | float | None) -> str:
 
 
 def build_popup_html(row: pd.Series) -> str:
-    """Build HTML content for a company popup."""
+    """
+    Build HTML content for a company popup.
+
+    Args:
+        row (pd.Series): A DataFrame row containing company data.
+
+    Returns:
+        str: Formatted HTML string for display in a Folium popup.
+    """
     founded_display = row["founded"] if pd.notna(row["founded"]) else "Unknown"
 
     employees = row.get("employees")
@@ -80,7 +107,15 @@ def build_popup_html(row: pd.Series) -> str:
 
 
 def add_legend(map_obj: folium.Map) -> None:
-    """Add a custom legend to the Folium map."""
+    """
+    Add a custom legend to the Folium map.
+
+    Args:
+        map_obj (folium.Map): The Folium map object to add the legend to.
+
+    Returns:
+        None
+    """
     legend_html = """
     <div style="
         position: fixed;
@@ -112,7 +147,15 @@ def add_legend(map_obj: folium.Map) -> None:
 
 
 def region_from_country(country: str) -> str:
-    """Map a country name to a broad region."""
+    """
+    Map a country name to a broad region.
+
+    Args:
+        country (str): Country name to classify.
+
+    Returns:
+        str: Region name: "North America", "Europe", "Asia / Middle East", or "Other".
+    """
     if pd.isna(country):
         return "Other"
 
@@ -137,7 +180,15 @@ def region_from_country(country: str) -> str:
 
 
 def region_color(region: str) -> str:
-    """Assign a marker color to each region."""
+    """
+    Assign a marker color to each region.
+
+    Args:
+        region (str): Region name ("North America", "Europe", "Asia / Middle East", or "Other").
+
+    Returns:
+        str: Color name for map markers ("blue", "green", "red", or "gray").
+    """
     colors = {
         "North America": "blue",
         "Europe": "green",
@@ -148,7 +199,15 @@ def region_color(region: str) -> str:
 
 
 def make_cluster(color: str) -> MarkerCluster:
-    """Create a MarkerCluster with a custom colored cluster icon."""
+    """
+    Create a MarkerCluster with a custom colored cluster icon.
+
+    Args:
+        color (str): Color name for the cluster icons (e.g., "blue", "green", "red", "gray").
+
+    Returns:
+        MarkerCluster: A Folium MarkerCluster object with custom styling.
+    """
     js = f"""
     function(cluster) {{
         return L.divIcon({{
@@ -166,7 +225,18 @@ def make_cluster(color: str) -> MarkerCluster:
 
 
 def make_map(companies_df: pd.DataFrame) -> None:
-    """Build an interactive world map with clustered, region-colored markers."""
+    """
+    Build an interactive world map with clustered, region-colored markers.
+
+    Creates a Folium map with regional layers, marker clusters, and legend.
+
+    Args:
+        companies_df (pd.DataFrame): DataFrame with company data including columns: 'name', 'url', 
+            'headquarters', 'lat', 'lon', and 'country'.
+
+    Returns:
+        None. Saves map to disk at path specified by OUTPUT_DIR config.
+    """
     validate_not_empty(companies_df, "make_map input")
     validate_columns(
         companies_df,
