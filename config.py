@@ -1,14 +1,12 @@
 """
-Configuration constants for the AI companies scraping project.
+Configuration constants.
 """
-import os
-
 BASE_URL = "https://en.wikipedia.org"
-LIST_URL = f"{BASE_URL}/wiki/List_of_artificial_intelligence_companies"
+ARTICLE_URL = f"{BASE_URL}/wiki/List_of_artificial_intelligence_companies"
 
 OUTPUT_DIR = "out"
-CACHE_FILE = os.path.join(OUTPUT_DIR, "ai_companies.csv")
-GEOCODE_CACHE_FILE = os.path.join(OUTPUT_DIR, "geocode_cache.csv")
+# CSV_FILE = os.path.join(OUTPUT_DIR, "ai_companies.csv")
+# GEOCODE_CACHE_FILE = os.path.join(OUTPUT_DIR, "geocode_cache.csv")
 
 USER_AGENT = (
     "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) "
@@ -17,3 +15,8 @@ USER_AGENT = (
 )
 
 HEADERS = {"User-Agent": USER_AGENT}
+
+NO_COMPANY_DATA = {"headquarters": None,
+                   "founded": None,
+                   "website": None,
+                   "employees": None}

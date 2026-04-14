@@ -11,7 +11,6 @@ specific to scraping, geocoding, or mapping.
 """
 import re
 import requests
-import pandas as pd
 from bs4 import BeautifulSoup
 
 from config import HEADERS
@@ -24,23 +23,28 @@ def fetch_soup(url: str) -> BeautifulSoup:
     return BeautifulSoup(response.text, "lxml")
 
 
-def validate_columns(df: pd.DataFrame, required: list[str], stage: str) -> None:
-    """Raise an error if required columns are missing."""
-    missing = [col for col in required if col not in df.columns]
-    if missing:
-        raise ValueError(
-            f"Missing required columns at {stage}: {missing}. "
-            f"Available columns: {list(df.columns)}"
-        )
+def clean_hq_text(hq: str) -> str:
+    """
+    Wrapper for clean/simplify/normalize hq string
+    """
+    result = clean_hq(simplify_hq(hq))
+    return result
 
 
-def validate_not_empty(df: pd.DataFrame, stage: str) -> None:
-    """Raise an error if a DataFrame is empty."""
-    if df.empty:
-        raise ValueError(f"DataFrame is empty at {stage}.")
+def normalize_hq(hq: str) -> str:
+    """Normalize headquarters text for cache lookup."""
+    return " ".join(hq.lower().split())
 
 
-def simplify_headquarters(hq: str) -> str:
+def clean_hq(hq: str) -> str:
+    """Remove citation markers and normalize punctuation spacing."""
+    hq = re.sub(r"\[\s*\d+\s*\]", "", hq)   # remove [1], [ 2 ], etc.
+    hq = re.sub(r"\s+,", ",", hq)           # remove space before commas
+    hq = re.sub(r"\s+", " ", hq)            # collapse repeated whitespace
+    return hq.strip(" ,")
+
+
+def simplify_hq(hq: str) -> str:
     """Reduce a headquarters string to a simpler geocoding target."""
     parts = [p.strip() for p in hq.split(",") if p.strip()]
     if len(parts) >= 3:
@@ -48,16 +52,3 @@ def simplify_headquarters(hq: str) -> str:
     if len(parts) >= 2:
         return ", ".join(parts[-2:])
     return hq.strip()
-
-
-def normalize_headquarters(hq: str) -> str:
-    """Normalize headquarters text for cache lookup."""
-    return " ".join(hq.lower().split())
-
-
-def clean_headquarters_text(hq: str) -> str:
-    """Remove citation markers and normalize punctuation spacing."""
-    hq = re.sub(r"\[\s*\d+\s*\]", "", hq)   # remove [1], [ 2 ], etc.
-    hq = re.sub(r"\s+,", ",", hq)           # remove space before commas
-    hq = re.sub(r"\s+", " ", hq)            # collapse repeated whitespace
-    return hq.strip(" ,")

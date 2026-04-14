@@ -1,13 +1,5 @@
 """
 Mapping utilities for visualizing AI companies on an interactive map.
-
-This module:
-- Assigns marker colors based on founding year
-- Builds popup content for each company
-- Creates a Folium map with markers and legend
-- Saves the final map as an HTML file
-
-This is the "visualization" stage of the pipeline.
 """
 import math
 import os
@@ -16,7 +8,7 @@ import folium
 from folium.plugins import Fullscreen, MarkerCluster
 
 from config import OUTPUT_DIR
-from utils import validate_columns, validate_not_empty
+
 
 def marker_size(employees: float | int | None) -> float:
     """
@@ -28,42 +20,13 @@ def marker_size(employees: float | int | None) -> float:
         employees (float | int | None): Number of employees, or None for unknown.
 
     Returns:
-        float: Marker radius in pixels, between 4 and 14.
+        float: Marker radius in pixels.
     """
     if pd.isna(employees) or not employees:
         return 5
 
-    # Log scaling keeps large companies from dominating the map
-    radius = 2 + math.log10(float(employees)) * 2
-    return max(4, min(14, radius))
-
-
-def get_marker_color(founded: str | float | None) -> str:
-    """
-    Map founding year to a color bucket.
-
-    Args:
-        founded (str | float | None): Founding year as a string, number, or None.
-
-    Returns:
-        str: Color name: "red" (pre-2000), "orange" (2000-2009), "yellow" (2010-2019), 
-                         "green" (2020+), or "gray" (unknown).
-    """
-    if pd.isna(founded):
-        return "gray"
-
-    try:
-        year = int(founded)
-    except ValueError:
-        return "gray"
-
-    if year < 2000:
-        return "red"
-    if year < 2010:
-        return "orange"
-    if year < 2020:
-        return "yellow"
-    return "green"
+    radius = math.log10(float(employees)) * 3
+    return max(5, min(14, radius))
 
 
 def build_popup_html(row: pd.Series) -> str:
@@ -76,12 +39,12 @@ def build_popup_html(row: pd.Series) -> str:
     Returns:
         str: Formatted HTML string for display in a Folium popup.
     """
-    founded_display = row["founded"] if pd.notna(row["founded"]) else "Unknown"
-
-    employees = row.get("employees")
-    employees_display = (
-        f"{int(employees):,}" if pd.notna(employees) else "Unknown"
-    )
+    if pd.notna(row["founded"]):
+        founded_display = row["founded"]
+        employees_display = f"{int(row.get('employees')):,}"
+    else:
+        founded_display = "Unknown"
+        employees_display = "Unknown"
 
     popup_html = (
         f'<div style="font-family: Arial; font-size: 12px;">'
@@ -237,13 +200,6 @@ def make_map(companies_df: pd.DataFrame) -> None:
     Returns:
         None. Saves map to disk at path specified by OUTPUT_DIR config.
     """
-    validate_not_empty(companies_df, "make_map input")
-    validate_columns(
-        companies_df,
-        ["name", "url", "headquarters", "lat", "lon", "country"],
-        "make_map input",
-    )
-
     valid = companies_df.dropna(subset=["lat", "lon"]).copy()
     print(f"Plotting {len(valid)} companies out of {len(companies_df)}")
 

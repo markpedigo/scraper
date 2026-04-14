@@ -1,151 +1,65 @@
 """
 Geocode utilities for converting headquarters into coordinates.
-
-This module:
-- Converts headquarters text into latitude/longitude.
-- Extracts country information.
-- Caches geocoding results to avoid repeated API calls.
 """
-import os
 import time
 import pandas as pd
 from geopy.geocoders import Nominatim
 from geopy.exc import GeocoderServiceError, GeocoderTimedOut, GeocoderUnavailable
+from config import USER_AGENT
 
-from config import GEOCODE_CACHE_FILE, USER_AGENT
-from utils import validate_columns, validate_not_empty
-from utils import simplify_headquarters, normalize_headquarters
 
-def load_geocode_cache() -> dict[str, tuple[float | None, float | None, str]]:
+def geocode_address(geolocator: Nominatim, hq: str) -> tuple[float | None, float | None, str]:
     """
-    Load geocoding results from disk into a dict keyed by headquarters string.
-
-    Returns:
-        dict[str, tuple[float | None, float | None, str]]: A dictionary that maps
-            headquarters strings to tuples of (latitude, longitude, country).
-            Latitude and longitude are None if geocoding failed.
-    """
-    if not os.path.exists(GEOCODE_CACHE_FILE):
-        return {}
-
-    cache_df = pd.read_csv(GEOCODE_CACHE_FILE)
-    cache: dict[str, tuple[float | None, float | None, str]] = {}
-
-    for _, row in cache_df.iterrows():
-        hq = row["headquarters"]
-        lat = row["lat"] if pd.notna(row["lat"]) else None
-        lon = row["lon"] if pd.notna(row["lon"]) else None
-        country = row["country"] if pd.notna(row["country"]) else "Unknown"
-        cache[hq] = (lat, lon, country)
-
-    return cache
-
-
-def save_geocode_cache(cache: dict[str, tuple[float | None, float | None, str]]) -> None:
-    """
-    Save geocoding cache to disk.
+    Geocode a single headquarters string to coordinates and country.
 
     Args:
-        cache (dict[str, tuple[float | None, float | None, str]]): A dictionary
-            mapping headquarters strings to tuples of (latitude, longitude,
-            country).
+        geolocator: Initialized Nominatim geolocator instance.
+        hq: Headquarters location string (e.g., "San Francisco, U.S.").
 
     Returns:
-        None
+        Tuple of (latitude, longitude, country). Latitude and longitude
+        are None on failure; country is "Unknown" on failure.
     """
-    rows = []
-    for headquarters, (lat, lon, country) in cache.items():
-        rows.append({
-            "headquarters": headquarters,
-            "lat": lat,
-            "lon": lon,
-            "country": country,
-        })
+    try:
+        loc = geolocator.geocode(hq, timeout=10)
+    except (GeocoderTimedOut, GeocoderUnavailable, GeocoderServiceError) as e:
+        print(f"Geocoding failed for '{hq}': {e}")
+        return None, None, "Unknown"
 
-    cache_df = pd.DataFrame(rows)
-    cache_df.to_csv(GEOCODE_CACHE_FILE, index=False)
+    if not loc:
+        return None, None, "Unknown"
+
+    if loc.address:
+        country = loc.address.split(",")[-1].strip()
+    else:
+        country = "Unknown"
+
+    return loc.latitude, loc.longitude, country
 
 
-def geocode(companies_df: pd.DataFrame) -> pd.DataFrame:
+def geocode_company_hq(companies_df: pd.DataFrame) -> pd.DataFrame:
     """
-    Convert headquarters strings into geographic coordinates.
+    Geocode the headquarters of each company in a DataFrame.
 
-    This function:
-    - validates the input DataFrame
-    - cleans and simplifies headquarters strings
-    - reuses cached geocoding results when available
-    - calls Nominatim only when needed
-    - appends lat, lon, and country columns
+    Iterates over the 'headquarters' column, resolving each entry to
+    latitude, longitude, and country via Nominatim. Sleeps 1.1 seconds
+    between requests to comply with Nominatim's rate limit policy.
 
     Args:
-        companies_df (pd.DataFrame): A DataFrame with columns 'name', 'url',
-            and 'headquarters'. The 'headquarters' column contains location
-            strings to geocode.
+        companies_df: DataFrame with a 'headquarters' column.
 
     Returns:
-        pd.DataFrame: The input DataFrame with three new columns added:
-            - 'lat' (float | None): Latitude of the headquarters location
-            - 'lon' (float | None): Longitude of the headquarters location
-            - 'country' (str): Country extracted from the geocoding result
+        The input DataFrame with 'lat', 'lon', and 'country' columns added.
     """
-    validate_not_empty(companies_df, "geocode input")
-    validate_columns(companies_df, ["name", "url", "headquarters"], "geocode input")
-
     geolocator = Nominatim(user_agent=USER_AGENT)
-    geocode_cache = load_geocode_cache()
 
-    lats: list[float | None] = []
-    lons: list[float | None] = []
-    countries: list[str] = []
-
+    results = []
     for hq in companies_df["headquarters"]:
-        if pd.isna(hq):
-            lats.append(None)
-            lons.append(None)
-            countries.append("Unknown")
-            continue
-
-        # Clean the raw headquarters text for geocoding.
-        hq_clean = simplify_headquarters(str(hq))
-
-        # Normalize the cleaned string so equivalent values reuse the same cache entry.
-        key = normalize_headquarters(hq_clean)
-
-        # Reuse cached result if we already geocoded this location.
-        if key in geocode_cache:
-            lat, lon, country = geocode_cache[key]
-            lats.append(lat)
-            lons.append(lon)
-            countries.append(country)
-            continue
-
-        try:
-            loc = geolocator.geocode(hq_clean, timeout=10)
-        except (GeocoderTimedOut, GeocoderUnavailable, GeocoderServiceError) as e:
-            print(f"Geocoding failed for '{hq_clean}': {e}")
-            lat, lon, country = None, None, "Unknown"
+        if pd.notna(hq):
+            results.append(geocode_address(geolocator, hq))
+            time.sleep(1.1)
         else:
-            if loc:
-                lat = loc.latitude
-                lon = loc.longitude
-                address_parts = loc.address.split(",") if loc.address else []
-                country = address_parts[-1].strip() if address_parts else "Unknown"
-            else:
-                lat, lon, country = None, None, "Unknown"
+            results.append((None, None, "Unknown"))
 
-        # Save the result under the normalized cache key.
-        geocode_cache[key] = (lat, lon, country)
-
-        lats.append(lat)
-        lons.append(lon)
-        countries.append(country)
-
-        # Sleep only when we make a real API call.
-        time.sleep(1.1)
-
-    companies_df["lat"] = lats
-    companies_df["lon"] = lons
-    companies_df["country"] = countries
-
-    save_geocode_cache(geocode_cache)
+    companies_df["lat"], companies_df["lon"], companies_df["country"] = zip(*results)
     return companies_df

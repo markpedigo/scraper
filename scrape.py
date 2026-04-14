@@ -1,13 +1,5 @@
 """
 Scraping logic for collecting AI company data from Wikipedia.
-
-This module handles:
-1. Extracting company links from the list page
-2. Visiting each company page
-3. Parsing infobox data (headquarters, founding year, website)
-4. Returning structured data as a DataFrame
-
-This is the "data collection" stage of the pipeline.
 """
 import re
 import time
@@ -15,8 +7,8 @@ import pandas as pd
 import requests
 from bs4 import BeautifulSoup
 
-from config import BASE_URL, LIST_URL, CACHE_FILE
-from utils import fetch_soup, validate_columns, validate_not_empty, clean_headquarters_text
+from config import BASE_URL, ARTICLE_URL, NO_COMPANY_DATA
+from utils import fetch_soup, clean_hq_text
 
 def get_company_links() -> list[dict[str, str]]:
     """
@@ -24,125 +16,110 @@ def get_company_links() -> list[dict[str, str]]:
 
     Returns:
         list[dict[str, str]]: List of dictionaries with keys 'name' and 'url'
-            for each company found on the Wikipedia AI companies list.
+                              for each company found on the Wikipedia AI companies list.
+                              e.g., [{'name': 'BlueDot', 
+                                      'url': 'https://en.wikipedia.org/wiki/BlueDot'},
+                                     {'name': 'Cohere',
+                                      'url': 'https://en.wikipedia.org/wiki/Cohere'}}]
     """
-    soup = fetch_soup(LIST_URL)
+    # Get html code from article.
+    soup = fetch_soup(ARTICLE_URL)
 
-    companies = []
-    seen_hrefs = set()
+    # From article html code, select links that start with "/wiki/".
+    wiki_links = soup.select("div.mw-parser-output ul li a[href^='/wiki/']")
 
-    candidate_links = soup.select("div.mw-parser-output ul li a[href^='/wiki/']")
+    # Pull out legit hrefs from wiki_links.
+    company_links = []
+    seen_hrefs = set()  # don't add dup links; e.g., Hugging Face appears twice in article
+    for wiki_link in wiki_links:
+        name = wiki_link.get_text(strip=True)
+        href = wiki_link.get("href", "")
 
-    for link in candidate_links:
-        name = link.get_text(strip=True)
-        href = link.get("href", "")
-
-        if ":" in href:
-            continue
-
-        if link.find_parent("div", class_="navbox"):
-            continue
-
-        if "list of" in name.lower():
-            continue
-
-        if href in seen_hrefs:
+        # If legit and not already in list, add link to company links list
+        if ((href in seen_hrefs) or
+            (":" in href) or
+            (wiki_link.find_parent("div", class_="navbox")) or
+            ("list of" in name.lower())):
             continue
 
         seen_hrefs.add(href)
-        companies.append({
+
+        company_links.append({
             "name": name,
             "url": BASE_URL + href,
         })
 
-    return companies
+    return company_links
 
 
-def parse_company_infobox(soup: BeautifulSoup) -> dict[str, str | None]:
+def parse_company_infobox(soup: BeautifulSoup) -> dict[str, str | int | None]:
     """
-    Parse a Wikipedia company page and extract headquarters, founding year,
-    and website from the infobox.
+    Extract key company fields from a Wikipedia infobox.
+
+    Parses the first table with class 'infobox' on the page, returning
+    headquarters, founding year, website, and employee count. Returns
+    NO_COMPANY_DATA if no infobox is found.
 
     Args:
-        soup (BeautifulSoup): Parsed HTML of a Wikipedia company page.
+        soup: Parsed BeautifulSoup object of a Wikipedia company page.
 
     Returns:
-        dict[str, str | None]: Dictionary with keys 'headquarters', 'founded',
-            'website', and 'employees', with values as strings or None if not found.
+        Dict with keys 'headquarters', 'founded', 'website', 'employees'.
+        Any field not found in the infobox is None.
     """
+    # Get info box from soup object.
     infobox = soup.find("table", class_="infobox")
     if not infobox:
-        return {"headquarters": None,
-                "founded": None,
-                "website": None,
-                "employees": None}
+        return NO_COMPANY_DATA
 
-    hq = None
-    founded = None
-    website = None
-    employees = None
-
+    # Parse info box.
+    headquarters = year_founded = website = nbr_employees = None
     for row in infobox.find_all("tr"):
-        header = row.find("th")
-        if not header:
+        label_element = row.find(class_="infobox-label")
+        data_element  = row.find(class_="infobox-data")
+        if not (label_element and data_element):
             continue
 
-        header_text = header.get_text(" ", strip=True).lower()
-        cell = row.find("td")
-        if not cell:
-            continue
+        label = label_element.get_text(strip=True).lower()
+        data  = data_element.get_text(" ", strip=True)
 
-        if "headquarters" in header_text:
-            for sup in cell.find_all("sup", class_="reference"):
-                sup.decompose()
-            hq = clean_headquarters_text(cell.get_text(separator=" ", strip=True))
-        elif "founded" in header_text or "founding" in header_text:
-            founded_text = cell.get_text(separator=" ", strip=True)
-            match = re.search(r"\b(19|20)\d{2}\b", founded_text)
-            if match:
-                founded = match.group(0)
-        elif "website" in header_text:
-            link = cell.find("a", href=True)
-            if link:
-                website = link["href"]
-                if not website.startswith("http"):
-                    website = "https://" + website
-        elif "employees" in header_text:
-            employees_text = cell.get_text(separator=" ", strip=True)
+        if "headquarters" in label:
+            headquarters = clean_hq_text(data)
+        elif "founded" in label:
+            year_founded = re.search(r'\b\d{4}\b', data).group()
+        elif "website" in label:
+            a = data_element.find("a")
+            website = a.get_text(strip=True).replace(" ", "") if a else data
+        elif "employees" in label:
+            m = re.search(r'\d+', data)
+            nbr_employees = int(m.group()) if m else None
 
-            # Grab the first large integer-like value: 1,500 or 1500
-            match = re.search(r"\b\d[\d,]*\b", employees_text)
-            if match:
-                employees = int(match.group(0).replace(",", ""))
-
-    return {"headquarters": hq,
-            "founded": founded,
+    return {"headquarters": headquarters,
+            "founded": year_founded,
             "website": website,
-            "employees": employees}
+            "employees": nbr_employees}
 
 
-def get_company_info(url: str) -> dict[str, str | None]:
+def get_company_info(url: str) -> dict[str, str | int | None]:
     """
-    Fetch a company's Wikipedia page and extract headquarters,
-    founding year, and website.
+    Fetch a Wikipedia company page and extract infobox fields.
+
+    Retrieves the page at the given URL, parses the infobox, and returns
+    structured company data. Returns NO_COMPANY_DATA on request failure.
 
     Args:
-        url (str): Wikipedia URL of the company page.
+        url: Full URL of a Wikipedia company page.
 
     Returns:
-        dict[str, str | None]: Dictionary with keys 'headquarters', 'founded',
-            'website', and 'employees'. Returns all None values if the request fails.
+        Dict with keys 'headquarters', 'founded', 'website', 'employees'.
+        Any field not found in the infobox is None.
     """
     try:
         soup = fetch_soup(url)
+        return parse_company_infobox(soup)
     except requests.RequestException as e:
         print(f"Request failed for {url}: {e}")
-        return {"headquarters": None,
-                "founded": None,
-                "website": None,
-                "employees": None}
-
-    return parse_company_infobox(soup)
+        return NO_COMPANY_DATA
 
 
 def scrape_companies() -> pd.DataFrame:
@@ -151,30 +128,36 @@ def scrape_companies() -> pd.DataFrame:
 
     Fetches companies from the Wikipedia AI companies list, visits each article
     to extract headquarters, founding year, website, and employee count data,
-    deduplicates by URL, and caches results to CACHE_FILE as CSV.
+    and deduplicates by URL.
 
     Returns:
         pd.DataFrame: DataFrame with columns 'name', 'headquarters', 'founded',
             'website', 'employees', and 'url'.
     """
+    # Get Wikipedia links to individual companies.
     companies = get_company_links()
-    print(f"Found {len(companies)} companies")
+
+    # Print # of companies.
+    nbr_companies = len(companies)
+    print(f"Found {nbr_companies} companies")
+
+    # Get company info for each company.
     records = []
-    for i, co in enumerate(companies):
-        print(f"  [{i + 1}/{len(companies)}] {co['name']}")
-        info = get_company_info(co["url"])
-        records.append({"name": co["name"], **info, "url": co["url"]})
+    for i, company in enumerate(companies):
+        print(f"[{i + 1}/{nbr_companies}] {company['name']}")
+
+        company_data = get_company_info(company["url"])
+        records.append(
+            {"name": company["name"],
+             "url": company["url"],
+             **company_data
+            }
+        )
+
         time.sleep(0.5)  # be a good citizen
+
+    # Create a dataframe from the company records.
     company_df = pd.DataFrame(records)
     company_df = company_df.drop_duplicates(subset="url")
 
-    validate_not_empty(company_df, "scrape_companies")
-    validate_columns(
-        company_df,
-        ["name", "headquarters", "founded", "website", "employees", "url"],
-        "scrape_companies",
-    )
-
-    company_df.to_csv(CACHE_FILE, index=False)
-    print(f"Saved to {CACHE_FILE}")
     return company_df
