@@ -5,7 +5,9 @@ import time
 import pandas as pd
 from geopy.geocoders import Nominatim
 from geopy.exc import GeocoderServiceError, GeocoderTimedOut, GeocoderUnavailable
+
 from config import USER_AGENT
+from utils import validate_columns, validate_not_empty
 
 
 def geocode_address(geolocator: Nominatim, hq: str) -> tuple[float | None, float | None, str]:
@@ -51,6 +53,8 @@ def geocode_company_hq(companies_df: pd.DataFrame) -> pd.DataFrame:
     Returns:
         The input DataFrame with 'lat', 'lon', and 'country' columns added.
     """
+    validate_not_empty(companies_df, "geocode input")
+    validate_columns(companies_df, ["name", "url", "headquarters"], "geocode input")
     geolocator = Nominatim(user_agent=USER_AGENT)
 
     results = []

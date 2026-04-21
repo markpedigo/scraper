@@ -8,7 +8,7 @@ import requests
 from bs4 import BeautifulSoup
 
 from config import BASE_URL, ARTICLE_URL, NO_COMPANY_DATA
-from utils import fetch_soup, clean_hq_text
+from utils import fetch_soup, clean_hq_text, validate_columns, validate_not_empty
 
 def get_company_links() -> list[dict[str, str]]:
     """
@@ -88,8 +88,11 @@ def parse_company_infobox(soup: BeautifulSoup) -> dict[str, str | int | None]:
         elif "founded" in label:
             year_founded = re.search(r'\b\d{4}\b', data).group()
         elif "website" in label:
-            a = data_element.find("a")
-            website = a.get_text(strip=True).replace(" ", "") if a else data
+            link = data_element.find("a", href=True)
+            if link:
+                website = link["href"]
+                if not website.startswith("http"):
+                    website = "https://" + website
         elif "employees" in label:
             m = re.search(r'\d+', data)
             nbr_employees = int(m.group()) if m else None
@@ -159,5 +162,13 @@ def scrape_companies() -> pd.DataFrame:
     # Create a dataframe from the company records.
     company_df = pd.DataFrame(records)
     company_df = company_df.drop_duplicates(subset="url")
+
+    # Validate dataframe
+    validate_not_empty(company_df, "scrape_companies")
+    validate_columns(
+        company_df,
+        ["name", "headquarters", "founded", "website", "employees", "url"],
+        "scrape_companies",
+    )
 
     return company_df

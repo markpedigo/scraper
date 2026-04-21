@@ -1,12 +1,14 @@
 """
 Configuration constants.
 """
+import os
+
 BASE_URL = "https://en.wikipedia.org"
 ARTICLE_URL = f"{BASE_URL}/wiki/List_of_artificial_intelligence_companies"
 
 OUTPUT_DIR = "out"
-# CSV_FILE = os.path.join(OUTPUT_DIR, "ai_companies.csv")
-# GEOCODE_CACHE_FILE = os.path.join(OUTPUT_DIR, "geocode_cache.csv")
+SCRAPE_CACHE_FILE = os.path.join(OUTPUT_DIR, "ai_companies.csv")
+GEOCODE_CACHE_FILE = os.path.join(OUTPUT_DIR, "geocode_cache.csv")
 
 USER_AGENT = (
     "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) "

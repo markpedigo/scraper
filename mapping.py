@@ -8,7 +8,7 @@ import folium
 from folium.plugins import Fullscreen, MarkerCluster
 
 from config import OUTPUT_DIR
-
+from utils import validate_columns, validate_not_empty
 
 def marker_size(employees: float | int | None) -> float:
     """
@@ -41,9 +41,13 @@ def build_popup_html(row: pd.Series) -> str:
     """
     if pd.notna(row["founded"]):
         founded_display = row["founded"]
-        employees_display = f"{int(row.get('employees')):,}"
     else:
         founded_display = "Unknown"
+
+    if pd.notna(row["employees"]):
+        employees = int(row.get("employees"))
+        employees_display = f"{employees:,}"
+    else:
         employees_display = "Unknown"
 
     popup_html = (
@@ -135,7 +139,7 @@ def region_from_country(country: str) -> str:
     if country in {
         "China", "Taiwan", "Japan", "India", "South Korea", "Singapore",
         "Israel", "Saudi Arabia", "United Arab Emirates", "Hong Kong",
-        "ישראל", "لسعودية", "中国", "日本", "대한민국"
+        "ישראל", "لسعودية", "中国", "日本", "대한민국", "السعودية", "الإمارات العربية المتحدة"
     }:
         return "Asia / Middle East"
 
@@ -200,13 +204,21 @@ def make_map(companies_df: pd.DataFrame) -> None:
     Returns:
         None. Saves map to disk at path specified by OUTPUT_DIR config.
     """
+    validate_not_empty(companies_df, "make_map input")
+    validate_columns(
+        companies_df,
+        ["name", "url", "headquarters", "lat", "lon", "country"],
+        "make_map input",
+    )
+
     valid = companies_df.dropna(subset=["lat", "lon"]).copy()
     print(f"Plotting {len(valid)} companies out of {len(companies_df)}")
 
     valid["region"] = valid["country"].apply(region_from_country)
 
-    print("\nCountries classified as Other:")
-    print(sorted(valid.loc[valid["region"] == "Other", "country"].dropna().unique()))
+    other = sorted(valid.loc[valid["region"] == "Other", "country"].dropna().unique())
+    if len(other) > 0:
+        print(f"\nCountries classified as Other: {other}")
 
     m = folium.Map(
         location=[30, 0],
