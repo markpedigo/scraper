@@ -48,11 +48,6 @@ def clean_hq_text(hq: str) -> str:
     return result
 
 
-def normalize_hq(hq: str) -> str:
-    """Normalize headquarters text for cache lookup."""
-    return " ".join(hq.lower().split())
-
-
 def clean_hq(hq: str) -> str:
     """Remove citation markers and normalize punctuation spacing."""
     hq = re.sub(r"\[\s*\d+\s*\]", "", hq)   # remove [1], [ 2 ], etc.

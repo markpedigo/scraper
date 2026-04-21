@@ -86,7 +86,8 @@ def parse_company_infobox(soup: BeautifulSoup) -> dict[str, str | int | None]:
         if "headquarters" in label:
             headquarters = clean_hq_text(data)
         elif "founded" in label:
-            year_founded = re.search(r'\b\d{4}\b', data).group()
+            match = re.search(r'\b\d{4}\b', data)
+            year_founded = match.group() if match else None
         elif "website" in label:
             link = data_element.find("a", href=True)
             if link:
