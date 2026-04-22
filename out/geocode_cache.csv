@@ -1,82 +1,81 @@
 name,url,headquarters,founded,website,employees,lat,lon,country
-BlueDot,https://en.wikipedia.org/wiki/BlueDot,"Toronto, Canada",2009.0,https://bluedot.global,,43.6534817,-79.3839347,Canada
-Cohere,https://en.wikipedia.org/wiki/Cohere,"Toronto, Ontario, Canada",2019.0,https://cohere.com/,450.0,43.6534817,-79.3839347,Canada
-Element AI,https://en.wikipedia.org/wiki/Element_AI,"Montreal, Quebec, Canada",2016.0,https://www.elementai.com/,,45.5031824,-73.5698065,Canada
-Maluuba,https://en.wikipedia.org/wiki/Maluuba,"Montreal, Quebec, Canada",2011.0,http://www.maluuba.com/,,45.5031824,-73.5698065,Canada
-Anysphere,https://en.wikipedia.org/wiki/Anysphere,"San Francisco, California, United States",2022.0,,150.0,37.7879363,-122.4075201,United States
-Anthropic,https://en.wikipedia.org/wiki/Anthropic,"San Francisco, California, U.S.",2021.0,https://www.anthropic.com/,2.0,37.7879363,-122.4075201,United States
-Caper AI,https://en.wikipedia.org/wiki/Caper_AI,"New York, US",2016.0,https://www.caper.ai,,40.7127281,-74.0060152,United States
-Cerebras,https://en.wikipedia.org/wiki/Cerebras,"Sunnyvale, California, US",2015.0,http://cerebras.ai,401.0,37.3688301,-122.036349,United States
-Cerence,https://en.wikipedia.org/wiki/Cerence,"Burlington, Massachusetts, U.S.",2019.0,http://cerence.com,1.0,42.5048167,-71.1956111,United States
-Cognition AI,https://en.wikipedia.org/wiki/Cognition_AI,"San Francisco, California, United States",2023.0,https://cognition.ai/,200.0,37.7879363,-122.4075201,United States
-Colloquis,https://en.wikipedia.org/wiki/Colloquis,,2000.0,,,,,Unknown
-Conversable,https://en.wikipedia.org/wiki/Conversable,"Suite 318, Austin, United States",2015.0,http://conversable.com/,39.0,30.3251945,-97.7085989,United States
-CoreWeave,https://en.wikipedia.org/wiki/CoreWeave,"Livingston, New Jersey, United States",2017.0,https://www.coreweave.com/,2.0,40.7959335,-74.3148713,United States
-Covariant,https://en.wikipedia.org/wiki/Covariant_(company),"Emeryville, California",2017.0,https://covariant.ai/,,37.8314089,-122.2865266,United States
-EleutherAI,https://en.wikipedia.org/wiki/EleutherAI,,2020.0,,,,,Unknown
-Glean Technologies,https://en.wikipedia.org/wiki/Glean_Technologies,"Palo Alto, California",2019.0,https://glean.com/,500.0,37.4443293,-122.1598465,United States
-Google AI,https://en.wikipedia.org/wiki/Google_AI,,2010.0,https://ai.google/,,,,Unknown
-Groq,https://en.wikipedia.org/wiki/Groq,"Mountain View, California, US",2016.0,https://groq.com/,250.0,37.3893889,-122.0832101,United States
-HeyGen,https://en.wikipedia.org/wiki/HeyGen,"Los Angeles, California, U.S.",2020.0,https://avatarbox.ru//,,34.0536909,-118.242766,United States
-Hugging Face,https://en.wikipedia.org/wiki/Hugging_Face,"Manhattan, New York City",2016.0,https://huggingface.co/,250.0,40.7579554,-73.9855319,United States
-Inflection AI,https://en.wikipedia.org/wiki/Inflection_AI,"Palo Alto, California, U.S.",2022.0,https://inflection.ai/,70.0,37.4443293,-122.1598465,United States
-Mercor,https://en.wikipedia.org/wiki/Mercor,"San Francisco, California, United States",2023.0,http://Mercor.com,300.0,37.7879363,-122.4075201,United States
-Meta AI,https://en.wikipedia.org/wiki/Meta_AI,"New York City, New York, U.S.",2015.0,https://ai.meta.com/,,40.7127281,-74.0060152,United States
-Microsoft AI,https://en.wikipedia.org/wiki/Microsoft_AI,"Redmond, Washington, United States",2024.0,https://microsoft.ai/,10.0,47.6694141,-122.1238767,United States
+BlueDot,https://en.wikipedia.org/wiki/BlueDot,"Toronto, Canada",2009,https://bluedot.global,,43.6534817,-79.3839347,Canada
+Cohere,https://en.wikipedia.org/wiki/Cohere,"Toronto, Ontario, Canada",2019,https://cohere.com/,450.0,43.6534817,-79.3839347,Canada
+Element AI,https://en.wikipedia.org/wiki/Element_AI,"Montreal, Quebec, Canada",2016,https://www.elementai.com/,,45.5031824,-73.5698065,Canada
+Maluuba,https://en.wikipedia.org/wiki/Maluuba,"Montreal, Quebec, Canada",2011,http://www.maluuba.com/,,45.5031824,-73.5698065,Canada
+Anysphere,https://en.wikipedia.org/wiki/Anysphere,"San Francisco, California, United States",2022,,150.0,37.7879363,-122.4075201,United States
+Anthropic,https://en.wikipedia.org/wiki/Anthropic,"San Francisco, California, U.S.",2021,https://www.anthropic.com/,2.0,37.7879363,-122.4075201,United States
+Caper AI,https://en.wikipedia.org/wiki/Caper_AI,"New York, US",2016,https://www.caper.ai,,40.7127281,-74.0060152,United States
+Cerebras,https://en.wikipedia.org/wiki/Cerebras,"Sunnyvale, California, US",2015,http://cerebras.ai,401.0,37.3688301,-122.036349,United States
+Cerence,https://en.wikipedia.org/wiki/Cerence,"Burlington, Massachusetts, U.S.",2019,http://cerence.com,1.0,42.5048167,-71.1956111,United States
+Cognition AI,https://en.wikipedia.org/wiki/Cognition_AI,"San Francisco, California, United States",2023,https://cognition.ai/,200.0,37.7879363,-122.4075201,United States
+Colloquis,https://en.wikipedia.org/wiki/Colloquis,,2000,,,,,Unknown
+Conversable,https://en.wikipedia.org/wiki/Conversable,"Suite 318, Austin, United States",2015,http://conversable.com/,39.0,30.3251945,-97.7085989,United States
+CoreWeave,https://en.wikipedia.org/wiki/CoreWeave,"Livingston, New Jersey, United States",2017,https://www.coreweave.com/,2.0,40.7959335,-74.3148713,United States
+Covariant,https://en.wikipedia.org/wiki/Covariant_(company),"Emeryville, California",2017,https://covariant.ai/,,37.8314089,-122.2865266,United States
+EleutherAI,https://en.wikipedia.org/wiki/EleutherAI,,2020,,,,,Unknown
+Glean Technologies,https://en.wikipedia.org/wiki/Glean_Technologies,"Palo Alto, California",2019,https://glean.com/,500.0,37.4443293,-122.1598465,United States
+Google AI,https://en.wikipedia.org/wiki/Google_AI,,2010,https://ai.google/,,,,Unknown
+Groq,https://en.wikipedia.org/wiki/Groq,"Mountain View, California, US",2016,https://groq.com/,250.0,37.3893889,-122.0832101,United States
+HeyGen,https://en.wikipedia.org/wiki/HeyGen,"Los Angeles, California, U.S.",2020,https://avatarbox.ru//,,34.0536909,-118.242766,United States
+Hugging Face,https://en.wikipedia.org/wiki/Hugging_Face,"Manhattan, New York City",2016,https://huggingface.co/,250.0,40.7579554,-73.9855319,United States
+Inflection AI,https://en.wikipedia.org/wiki/Inflection_AI,"Palo Alto, California, U.S.",2022,https://inflection.ai/,70.0,37.4443293,-122.1598465,United States
+Mercor,https://en.wikipedia.org/wiki/Mercor,"San Francisco, California, United States",2023,http://Mercor.com,300.0,37.7879363,-122.4075201,United States
+Meta AI,https://en.wikipedia.org/wiki/Meta_AI,"New York City, New York, U.S.",2015,https://ai.meta.com/,,40.7127281,-74.0060152,United States
+Microsoft AI,https://en.wikipedia.org/wiki/Microsoft_AI,"Redmond, Washington, United States",2024,https://microsoft.ai/,10.0,47.6694141,-122.1238767,United States
 "Midjourney, Inc.",https://en.wikipedia.org/wiki/Midjourney,,,https://www.midjourney.com/,,,,Unknown
-Nuro,https://en.wikipedia.org/wiki/Nuro,"Mountain View, California, United States",2016.0,http://nuro.ai,700.0,37.3893889,-122.0832101,United States
-OpenAI,https://en.wikipedia.org/wiki/OpenAI,"San Francisco, California, U.S.",2015.0,https://openai.com/,4.0,37.7879363,-122.4075201,United States
-Perplexity AI,https://en.wikipedia.org/wiki/Perplexity_AI,"San Francisco, California, U.S.",2022.0,https://perplexity.ai,52.0,37.7879363,-122.4075201,United States
-RAIC Labs,https://en.wikipedia.org/wiki/RAIC_Labs,"Delafield, WI, United States",2019.0,,,43.0594237,-88.4040172,United States
-Runway,https://en.wikipedia.org/wiki/Runway_(company),"Manhattan, New York City, U.S.",2018.0,https://runwayml.com/,86.0,40.7579554,-73.9855319,United States
-Safe Superintelligence Inc.,https://en.wikipedia.org/wiki/Safe_Superintelligence_Inc.,"Palo Alto, California Tel Aviv, Israel",2024.0,https://ssi.inc/,50.0,,,Unknown
-Scale AI,https://en.wikipedia.org/wiki/Scale_AI,"San Francisco, California, United States",2016.0,https://scale.com,1.0,37.7879363,-122.4075201,United States
+Nuro,https://en.wikipedia.org/wiki/Nuro,"Mountain View, California, United States",2016,http://nuro.ai,700.0,37.3893889,-122.0832101,United States
+OpenAI,https://en.wikipedia.org/wiki/OpenAI,"San Francisco, California, U.S.",2015,https://openai.com/,4.0,37.7879363,-122.4075201,United States
+Perplexity AI,https://en.wikipedia.org/wiki/Perplexity_AI,"San Francisco, California, U.S.",2022,https://perplexity.ai,52.0,37.7879363,-122.4075201,United States
+RAIC Labs,https://en.wikipedia.org/wiki/RAIC_Labs,"Delafield, WI, United States",2019,,,43.0594237,-88.4040172,United States
+Runway,https://en.wikipedia.org/wiki/Runway_(company),"Manhattan, New York City, U.S.",2018,https://runwayml.com/,86.0,40.7579554,-73.9855319,United States
+Safe Superintelligence Inc.,https://en.wikipedia.org/wiki/Safe_Superintelligence_Inc.,"Palo Alto, California Tel Aviv, Israel",2024,https://ssi.inc/,50.0,,,Unknown
+Scale AI,https://en.wikipedia.org/wiki/Scale_AI,"San Francisco, California, United States",2016,https://scale.com,1.0,37.7879363,-122.4075201,United States
 Spectre AI,https://en.wikipedia.org/wiki/Spectre_AI,,,,,,,Unknown
-Thinking Machines Lab,https://en.wikipedia.org/wiki/Thinking_Machines_Lab,"San Francisco, California, United States",2025.0,https://thinkingmachines.ai,100.0,37.7879363,-122.4075201,United States
+Thinking Machines Lab,https://en.wikipedia.org/wiki/Thinking_Machines_Lab,"San Francisco, California, United States",2025,https://thinkingmachines.ai,100.0,37.7879363,-122.4075201,United States
 Undetectable.ai,https://en.wikipedia.org/wiki/Undetectable.ai,,,https://www.undetectable.ai,,,,Unknown
-Waymo,https://en.wikipedia.org/wiki/Waymo,"Mountain View, California, United States",2004.0,https://waymo.com,2.0,37.3893889,-122.0832101,United States
-Writer,https://en.wikipedia.org/wiki/Writer_Inc.,"San Francisco, California, United States",2020.0,http://writer.com,,37.7879363,-122.4075201,United States
-Writesonic,https://en.wikipedia.org/wiki/Writesonic,"San Francisco, California, United States",2020.0,http://writesonic.com,,37.7879363,-122.4075201,United States
-xAI,https://en.wikipedia.org/wiki/XAI_(company),"Palo Alto, California, United States",2023.0,https://x.ai/,1.0,37.4443293,-122.1598465,United States
-Zoox,https://en.wikipedia.org/wiki/Zoox,"Foster City, California",2014.0,http://zoox.com,2.0,37.5600336,-122.2688522,United States
-01.AI,https://en.wikipedia.org/wiki/01.AI,"Beijing, China",2023.0,https://www.01.ai/,100.0,39.9057136,116.3912972,中国
-4Paradigm,https://en.wikipedia.org/wiki/4Paradigm,"Beijing, China",2014.0,http://www.4paradigm.com,1.0,39.9057136,116.3912972,中国
-Baichuan,https://en.wikipedia.org/wiki/Baichuan,"Beijing, China",2023.0,https://www.baichuan-ai.com/,170.0,39.9057136,116.3912972,中国
-DeepSeek,https://en.wikipedia.org/wiki/DeepSeek,"Hangzhou, Zhejiang, China",2023.0,https://www.deepseek.com/,160.0,30.2489634,120.2052342,中国
-MiniMax,https://en.wikipedia.org/wiki/MiniMax_(company),"Shanghai, China",2021.0,https://www.minimax.io/,200.0,31.2312707,121.4700152,中国
-Moonshot AI,https://en.wikipedia.org/wiki/Moonshot_AI,"Beijing, China",2023.0,https://www.moonshot.ai/,200.0,39.9057136,116.3912972,中国
-SenseTime,https://en.wikipedia.org/wiki/SenseTime,"Science Park, Hong Kong",2014.0,https://www.sensetime.com,3.0,22.4241563,114.2114985,中国
-StepFun,https://en.wikipedia.org/wiki/StepFun,"Shanghai, China",2023.0,https://www.stepfun.com,,31.2312707,121.4700152,中国
-Zhipu AI,https://en.wikipedia.org/wiki/Zhipu_AI,"Beijing, China",2019.0,https://zhipuai.cn/,800.0,39.9057136,116.3912972,中国
-Artisse AI,https://en.wikipedia.org/wiki/Artisse_AI,"Sheung Wan, Hong Kong",2022.0,http://artisse.ai/,,22.2865158,114.150208,中国
-Haptik,https://en.wikipedia.org/wiki/Haptik,"Mumbai, India",2013.0,,196.0,19.054999,72.8692035,India
-Sarvam AI,https://en.wikipedia.org/wiki/Sarvam_AI,"Bengaluru, Karnataka, India",2023.0,https://www.sarvam.ai/,,12.9767936,77.590082,India
-NeuralGarage,https://en.wikipedia.org/wiki/NeuralGarage,"Bangalore, India",2021.0,https://visualdub.ai,,12.9767936,77.590082,India
-AI21 Labs,https://en.wikipedia.org/wiki/AI21_Labs,"Tel Aviv, Israel",2017.0,https://ai21.com,,32.0852997,34.7818064,ישראל
-Hailo Technologies,https://en.wikipedia.org/wiki/Hailo_Technologies,"82 Yigal Alon St. Tel-Aviv, Israel",2017.0,https://www.hailo.ai,,,,Unknown
-Sakana AI,https://en.wikipedia.org/wiki/Sakana_AI,"Tokyo, Japan",2023.0,https://sakana.ai/,20.0,35.6768601,139.7638947,日本
-Humain,https://en.wikipedia.org/wiki/Humain,"Riyadh, Saudi Arabia",2025.0,http://humain.ai,,23.333333,45.333333,السعودية
-Upstage,https://en.wikipedia.org/wiki/Upstage_(company),"Yongin, South Korea",2020.0,https://www.upstage.ai/,,37.2405741,127.1785572,대한민국
-G42,https://en.wikipedia.org/wiki/G42_(company),"Abu Dhabi, United Arab Emirates",2018.0,https://g42.ai/,25.0,24.4538352,54.3774014,الإمارات العربية المتحدة
-Art Recognition,https://en.wikipedia.org/wiki/Art_Recognition,,2019.0,https://www.art-recognition.com/,,,,Unknown
-Dataiku,https://en.wikipedia.org/wiki/Dataiku,"New York City, United States",2013.0,http://dataiku.com,1.0,40.7127281,-74.0060152,United States
-H Company,https://en.wikipedia.org/wiki/H_(company),"Paris, France",2023.0,http://hcompany.ai/,90.0,48.8588897,2.320041,France
-LightOn,https://en.wikipedia.org/wiki/LightOn,"Paris, France",2016.0,https://lighton.ai,41.0,48.8588897,2.320041,France
-Linagora,https://en.wikipedia.org/wiki/Linagora,"Paris, France",2000.0,https://www.linagora.com/,200.0,48.8588897,2.320041,France
-Mistral AI,https://en.wikipedia.org/wiki/Mistral_AI,"Paris, France",2023.0,https://mistral.ai/,350.0,48.8588897,2.320041,France
-Owkin,https://en.wikipedia.org/wiki/Owkin,"Paris, France",2016.0,https://owkin.com,350.0,48.8588897,2.320041,France
-Poolside AI,https://en.wikipedia.org/wiki/Poolside_AI,"San Francisco, United States",2023.0,https://poolside.ai,,37.7879363,-122.4075201,United States
-Aleph Alpha,https://en.wikipedia.org/wiki/Aleph_Alpha,"Heidelberg, Germany",2019.0,https://aleph-alpha.com/,51.0,49.4093582,8.694724,Deutschland
+Waymo,https://en.wikipedia.org/wiki/Waymo,"Mountain View, California, United States",2004,https://waymo.com,2.0,37.3893889,-122.0832101,United States
+Writer,https://en.wikipedia.org/wiki/Writer_Inc.,"San Francisco, California, United States",2020,http://writer.com,,37.7879363,-122.4075201,United States
+Writesonic,https://en.wikipedia.org/wiki/Writesonic,"San Francisco, California, United States",2020,http://writesonic.com,,37.7879363,-122.4075201,United States
+xAI,https://en.wikipedia.org/wiki/XAI_(company),"Palo Alto, California, United States",2023,https://x.ai/,1.0,37.4443293,-122.1598465,United States
+Zoox,https://en.wikipedia.org/wiki/Zoox,"Foster City, California",2014,http://zoox.com,2.0,37.5600336,-122.2688522,United States
+01.AI,https://en.wikipedia.org/wiki/01.AI,"Beijing, China",2023,https://www.01.ai/,100.0,39.9057136,116.3912972,中国
+4Paradigm,https://en.wikipedia.org/wiki/4Paradigm,"Beijing, China",2014,http://www.4paradigm.com,1.0,39.9057136,116.3912972,中国
+Baichuan,https://en.wikipedia.org/wiki/Baichuan,"Beijing, China",2023,https://www.baichuan-ai.com/,170.0,39.9057136,116.3912972,中国
+DeepSeek,https://en.wikipedia.org/wiki/DeepSeek,"Hangzhou, Zhejiang, China",2023,https://www.deepseek.com/,160.0,30.2489634,120.2052342,中国
+MiniMax,https://en.wikipedia.org/wiki/MiniMax_(company),"Shanghai, China",2021,https://www.minimax.io/,200.0,31.2312707,121.4700152,中国
+Moonshot AI,https://en.wikipedia.org/wiki/Moonshot_AI,"Beijing, China",2023,https://www.moonshot.ai/,200.0,39.9057136,116.3912972,中国
+SenseTime,https://en.wikipedia.org/wiki/SenseTime,"Science Park, Hong Kong",2014,https://www.sensetime.com,3.0,22.4241458,114.2115072,中国
+StepFun,https://en.wikipedia.org/wiki/StepFun,"Shanghai, China",2023,https://www.stepfun.com,,31.2312707,121.4700152,中国
+Zhipu AI,https://en.wikipedia.org/wiki/Zhipu_AI,"Beijing, China",2019,https://zhipuai.cn/,800.0,39.9057136,116.3912972,中国
+Artisse AI,https://en.wikipedia.org/wiki/Artisse_AI,"Sheung Wan, Hong Kong",2022,http://artisse.ai/,,22.2865158,114.150208,中国
+Haptik,https://en.wikipedia.org/wiki/Haptik,"Mumbai, India",2013,,196.0,19.054999,72.8692035,India
+Sarvam AI,https://en.wikipedia.org/wiki/Sarvam_AI,"Bengaluru, Karnataka, India",2023,https://www.sarvam.ai/,,12.9767936,77.590082,India
+NeuralGarage,https://en.wikipedia.org/wiki/NeuralGarage,"Bangalore, India",2021,https://visualdub.ai,,12.9767936,77.590082,India
+AI21 Labs,https://en.wikipedia.org/wiki/AI21_Labs,"Tel Aviv, Israel",2017,https://ai21.com,,32.0852997,34.7818064,ישראל
+Hailo Technologies,https://en.wikipedia.org/wiki/Hailo_Technologies,"82 Yigal Alon St. Tel-Aviv, Israel",2017,https://www.hailo.ai,,,,Unknown
+Sakana AI,https://en.wikipedia.org/wiki/Sakana_AI,"Tokyo, Japan",2023,https://sakana.ai/,20.0,35.6768601,139.7638947,日本
+Humain,https://en.wikipedia.org/wiki/Humain,"Riyadh, Saudi Arabia",2025,http://humain.ai,,23.333333,45.333333,السعودية
+Upstage,https://en.wikipedia.org/wiki/Upstage_(company),"Yongin, South Korea",2020,https://www.upstage.ai/,,37.2405741,127.1785572,대한민국
+G42,https://en.wikipedia.org/wiki/G42_(company),"Abu Dhabi, United Arab Emirates",2018,https://g42.ai/,25.0,24.4538352,54.3774014,الإمارات العربية المتحدة
+Art Recognition,https://en.wikipedia.org/wiki/Art_Recognition,,2019,https://www.art-recognition.com/,,,,Unknown
+Dataiku,https://en.wikipedia.org/wiki/Dataiku,"New York City, United States",2013,http://dataiku.com,1.0,40.7127281,-74.0060152,United States
+H Company,https://en.wikipedia.org/wiki/H_(company),"Paris, France",2023,http://hcompany.ai/,90.0,48.8534951,2.3483915,France
+LightOn,https://en.wikipedia.org/wiki/LightOn,"Paris, France",2016,https://lighton.ai,41.0,48.8534951,2.3483915,France
+Linagora,https://en.wikipedia.org/wiki/Linagora,"Paris, France",2000,https://www.linagora.com/,200.0,48.8534951,2.3483915,France
+Mistral AI,https://en.wikipedia.org/wiki/Mistral_AI,"Paris, France",2023,https://mistral.ai/,350.0,48.8534951,2.3483915,France
+Owkin,https://en.wikipedia.org/wiki/Owkin,"Paris, France",2016,https://owkin.com,350.0,48.8534951,2.3483915,France
+Poolside AI,https://en.wikipedia.org/wiki/Poolside_AI,"San Francisco, United States",2023,https://poolside.ai,,37.7879363,-122.4075201,United States
+Aleph Alpha,https://en.wikipedia.org/wiki/Aleph_Alpha,"Heidelberg, Germany",2019,https://aleph-alpha.com/,51.0,49.4093582,8.694724,Deutschland
 DeepL,https://en.wikipedia.org/wiki/DeepL,"Cologne, North Rhine-Westphalia, Germany",,,,50.938361,6.959974,Deutschland
 Axelera AI,https://en.wikipedia.org/wiki/Axelera_AI,,,,,,,Unknown
 1X Technologies,https://en.wikipedia.org/wiki/1X_Technologies,,,,,,,Unknown
-Lovable,https://en.wikipedia.org/wiki/Lovable_(company),"Stockholm, Sweden",2023.0,https://lovable.dev/,120.0,59.3251172,18.0710935,Sverige
-Respeecher,https://en.wikipedia.org/wiki/Respeecher,"Kyiv, Ukraine",2018.0,https://www.respeecher.com/,,50.4500336,30.5241361,Україна
-DeepMind,https://en.wikipedia.org/wiki/Google_DeepMind,"London, England",2010.0,https://deepmind.google/,6.0,51.5074456,-0.1277653,United Kingdom
-Gradient Labs,https://en.wikipedia.org/wiki/Gradient_Labs,London,2023.0,https://gradient-labs.ai/,,51.5074456,-0.1277653,United Kingdom
-Isomorphic Labs,https://en.wikipedia.org/wiki/Isomorphic_Labs,"London, United Kingdom",2021.0,https://www.isomorphiclabs.com,,51.5074456,-0.1277653,United Kingdom
-Mind Foundry,https://en.wikipedia.org/wiki/Mind_Foundry,"Oxford, Oxfordshire, United Kingdom",2016.0,https://www.mindfoundry.ai/,75.0,51.7520131,-1.2578499,United Kingdom
-Peak,https://en.wikipedia.org/wiki/Peak_(company),"Manchester, England",2015.0,http://peak.ai,,53.4794892,-2.2451148,United Kingdom
-Stability AI,https://en.wikipedia.org/wiki/Stability_AI,"London, England, UK",2019.0,https://stability.ai/,170.0,51.5074456,-0.1277653,United Kingdom
-Synthesia,https://en.wikipedia.org/wiki/Synthesia_(company),"London, United Kingdom",2017.0,https://www.synthesia.io,550.0,51.5074456,-0.1277653,United Kingdom
-Lists of open-source artificial intelligence software,https://en.wikipedia.org/wiki/Lists_of_open-source_artificial_intelligence_software,,,,,,,Unknown
+Lovable,https://en.wikipedia.org/wiki/Lovable_(company),"Stockholm, Sweden",2023,https://lovable.dev/,120.0,59.3251172,18.0710935,Sverige
+Respeecher,https://en.wikipedia.org/wiki/Respeecher,"Kyiv, Ukraine",2018,https://www.respeecher.com/,,50.4500336,30.5241361,Україна
+DeepMind,https://en.wikipedia.org/wiki/Google_DeepMind,"London, England",2010,https://deepmind.google/,6.0,51.5074456,-0.1277653,United Kingdom
+Gradient Labs,https://en.wikipedia.org/wiki/Gradient_Labs,London,2023,https://gradient-labs.ai/,,51.5074456,-0.1277653,United Kingdom
+Isomorphic Labs,https://en.wikipedia.org/wiki/Isomorphic_Labs,"London, United Kingdom",2021,https://www.isomorphiclabs.com,,51.5074456,-0.1277653,United Kingdom
+Mind Foundry,https://en.wikipedia.org/wiki/Mind_Foundry,"Oxford, Oxfordshire, United Kingdom",2016,https://www.mindfoundry.ai/,75.0,51.7520131,-1.2578499,United Kingdom
+Peak,https://en.wikipedia.org/wiki/Peak_(company),"Manchester, England",2015,http://peak.ai,,53.4794892,-2.2451148,United Kingdom
+Stability AI,https://en.wikipedia.org/wiki/Stability_AI,"London, England, UK",2019,https://stability.ai/,170.0,51.5074456,-0.1277653,United Kingdom
+Synthesia,https://en.wikipedia.org/wiki/Synthesia_(company),"London, United Kingdom",2017,https://www.synthesia.io,550.0,51.5074456,-0.1277653,United Kingdom

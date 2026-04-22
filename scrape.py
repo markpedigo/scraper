@@ -39,7 +39,8 @@ def get_company_links() -> list[dict[str, str]]:
         if ((href in seen_hrefs) or
             (":" in href) or
             (wiki_link.find_parent("div", class_="navbox")) or
-            ("list of" in name.lower())):
+            ("list of" in name.lower()) or
+            ("lists of" in name.lower())
             continue
 
         seen_hrefs.add(href)
